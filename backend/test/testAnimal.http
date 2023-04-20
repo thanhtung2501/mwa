@@ -1,0 +1,120 @@
+GET http://localhost:3000/animals
+
+###
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+    "category": "cat",
+    "name": "Fluffy",
+    "breed": "Persian",
+    "sex": "female",
+    "age": 4,
+    "color": "white",
+    "weight": 4.5,
+    "status_animal": "MISSING",
+    "report": [
+      {
+        "createDate": "2022-03-10",
+        "lossDate": "2022-03-05",
+        "status_report": "MISSING"
+      }
+    ],
+    "image": []
+  }
+
+
+
+
+###
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+    "category": "dog",
+    "name": "Max",
+    "breed": "Golden Retriever",
+    "sex": "male",
+    "age": 2,
+    "color": "golden",
+    "weight": 30,
+    "status_animal": "MISSING",
+    "report": [
+        {   
+            "createDate": "2023-04-16",
+            "lossDate": "2023-04-15",
+            "status_report": "MISSING"
+        }
+            ],
+    "image": [
+        {
+            "filename": "max.jpg"
+        }
+            ]
+}
+
+
+
+###
+POST http://localhost:3000/animals
+Content-Type: application/json
+
+{
+  "category": "bird",
+  "name": "Kiwi",
+  "breed": "Parakeet",
+  "sex": "female",
+  "age": 1,
+  "color": "green",
+  "weight": 0.1,
+  "status_animal": "AVAILABLE",
+  "report": [
+    {
+      "createDate": "2023-04-10",
+      "lossDate": "2023-04-09",
+      "status_report": "found"
+    },
+    {
+      "createDate": "2023-05-16",
+      "status_report": "ADOPT"
+    }
+  ],
+  "image": [
+  ]
+}
+
+###
+GET http://localhost:3000/animals/643f56361459f3d3c0b39f06
+
+###
+PATCH  http://localhost:3000/animals/643f56361459f3d3c0b39f06
+Content-Type: application/json
+
+{
+  "category": "bird_update",
+  "name": "Kiwi",
+  "breed": "Parakeet",
+  "sex": "female",
+  "age": 1,
+  "color": "green",
+  "weight": 0.1,
+  "status_animal": "AVAILABLE",
+  "report": [
+    {
+      "createDate": "2023-04-10",
+      "lossDate": "2023-04-09",
+      "status_report": "found"
+    },
+    {
+      "createDate": "2023-05-16",
+      "status_report": "ADOPT"
+    }
+  ],
+  "image": [
+  ]
+}
+
+
+###
+DELETE  http://localhost:3000/animals/643f56361459f3d3c0b39f06
+Content-Type: application/json

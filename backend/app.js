@@ -7,6 +7,8 @@ import * as url from 'url';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import imageRouter from './routes/imageRouters.js';
+import userRouter from './routes/userRouter.js';
+import animalRouter from './routes/animalRouter.js';
 
 // init
 const app = express();
@@ -20,6 +22,8 @@ dotenv.config();
 
 // routes
 app.use('/images', imageRouter);
+app.use('/users', userRouter);
+app.use('/animals', animalRouter);
 
 app.all('*', (req, res, next) => {
     next(new Error('Route not found'));
