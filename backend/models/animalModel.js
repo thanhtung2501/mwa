@@ -1,6 +1,7 @@
 import {mongoose} from "mongoose";
 
-export const AnimalSchema = mongoose.Schema(
+
+export const Animal = mongoose.Schema(
     {
         category: String,
         name: String,
@@ -13,7 +14,7 @@ export const AnimalSchema = mongoose.Schema(
         images: [
             {
                 filename: String,
-            },
+            }
         ]
     }
 );

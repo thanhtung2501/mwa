@@ -1,27 +1,26 @@
-import Animal from "../models/animal.js";
-import {STATUS_REPORT} from "../models/reportAnimalModel.js";
+import ReportAnimal from "../models/reportAnimalModel.js"
 
 const AnimalService = {
     getAll: async function() {
-        return await Animal.find({});
+        return await ReportAnimal.find({});
     },
-    create: async function(animal) {
-        return await Animal.create(animal);
+    create: async function(animalReport) {
+        return await ReportAnimal.create(animalReport);
     },
     getAnimalByReportStatus: async function(status) {
-      return await Animal.find({status_report: status });
+      return await ReportAnimal.find({status_report: status });
     },
     getById: async function (id) {
-        return await Animal.findOne({_id: id});
+        return await ReportAnimal.findOne({_id: id});
     },
-    update: async function(id, new_animal) {
-        return await  Animal.updateOne(
+    update: async function(id, new_animalReport) {
+        return await  ReportAnimal.updateOne(
             {_id: id},
-            {$set: { _id: animal_id, Animal: updated_animal } }
+            {$set: { _id: id, Animal: new_animalReport } }
         );
     },
     delete: async function(id){
-        return await Animal.deleteOne({_id: id});
+        return await ReportAnimal.deleteOne({_id: id});
     }
 }
 

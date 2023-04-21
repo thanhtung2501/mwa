@@ -1,12 +1,11 @@
-GET http://localhost:3000/missingAnimals
+GET http://localhost:3000/animalReports/missingAnimal
 
 ###
-POST http://localhost:3000/missingAnimals
+POST http://localhost:3000/animalReports/missingAnimal
 Content-Type: application/json
 
 {
-  "lossDate": "2022-03-10",
-  "status_report": "MISSING",
+  "loss_date": "2022-03-10",
   "animal": {
     "category": "Cat",
     "name": "Fluffy",
@@ -14,104 +13,65 @@ Content-Type: application/json
     "sex": "female",
     "age": 4,
     "color": "white",
-    "weight": 4.5,
-    "status_animal": "MISSING"
+    "weight": 4.5
   },
     "image": []
   }
 
-
-
+###
+GET http://localhost:3000/animalReports/foundAnimal
 
 ###
-POST http://localhost:3000/animals
+POST http://localhost:3000/animalReports/foundAnimal
 Content-Type: application/json
 
 {
-    "category": "dog",
-    "name": "Max",
-    "breed": "Golden Retriever",
-    "sex": "male",
-    "age": 2,
-    "color": "golden",
-    "weight": 30,
-    "status_animal": "MISSING",
-    "report": [
-        {   
-            "createDate": "2023-04-16",
-            "lossDate": "2023-04-15",
-            "status_report": "MISSING"
-        }
-            ],
-    "image": [
-        {
-            "filename": "max.jpg"
-        }
-            ]
+  "found_date": "2022-03-10",
+  "animal": {
+    "category": "Cat",
+    "name": "Fluffy",
+    "breed": "Persian",
+    "sex": "female",
+    "age": 4,
+    "color": "white",
+    "weight": 4.5
+  },
+  "image": []
 }
-
-
+###
+GET http://localhost:3000/animalReports/adoptAnimal
 
 ###
-POST http://localhost:3000/animals
+POST http://localhost:3000/animalReports/adoptAnimal
 Content-Type: application/json
 
 {
-  "category": "bird",
-  "name": "Kiwi",
-  "breed": "Parakeet",
-  "sex": "female",
-  "age": 1,
-  "color": "green",
-  "weight": 0.1,
-  "status_animal": "AVAILABLE",
-  "report": [
-    {
-      "createDate": "2023-04-10",
-      "lossDate": "2023-04-09",
-      "status_report": "found"
-    },
-    {
-      "createDate": "2023-05-16",
-      "status_report": "ADOPT"
-    }
-  ],
-  "image": [
-  ]
+  "adopt_date": "2022-03-10",
+  "animal": {
+    "category": "Cat S",
+    "name": "Fluffy",
+    "breed": "Persian",
+    "sex": "female",
+    "age": 4,
+    "color": "white",
+    "weight": 4.5
+  },
+  "adopted_user": {
+    "_id": "6441eb8d48bbb95331a8c8d4",
+    "name": "Thao",
+    "email": "",
+    "address": {},
+    "phoneNumber": ""
+  },
+  "image": []
 }
 
 ###
-GET http://localhost:3000/animals/643f56361459f3d3c0b39f06
+GET http://localhost:3000/animalReports/6442ba687b340c291437be7d
 
 ###
-PATCH  http://localhost:3000/animals/643f56361459f3d3c0b39f06
-Content-Type: application/json
-
-{
-  "category": "bird_update",
-  "name": "Kiwi",
-  "breed": "Parakeet",
-  "sex": "female",
-  "age": 1,
-  "color": "green",
-  "weight": 0.1,
-  "status_animal": "AVAILABLE",
-  "report": [
-    {
-      "createDate": "2023-04-10",
-      "lossDate": "2023-04-09",
-      "status_report": "found"
-    },
-    {
-      "createDate": "2023-05-16",
-      "status_report": "ADOPT"
-    }
-  ],
-  "image": [
-  ]
-}
-
+PATCH http://localhost:3000/animalReports/6442ba687b340c291437be7d
 
 ###
-DELETE  http://localhost:3000/animals/643f56361459f3d3c0b39f06
+DELETE  http://localhost:3000/animalReports/6442ba687b340c291437be7d
 Content-Type: application/json

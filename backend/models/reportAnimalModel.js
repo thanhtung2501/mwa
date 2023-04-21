@@ -1,5 +1,6 @@
 import { mongoose } from "mongoose";
-import {AnimalSchema} from "../models/reportAnimalModels.js";
+import {Animal} from "./animalModel.js";
+import { User } from "./userModel.js";
 
 export const STATUS_ANIMAL = {
   MISSING_ANIMAL: "MISSING",
@@ -19,13 +20,15 @@ export const ANIMAL_CATEGORY = {
     CAT: "Cat",
     DOG: "Dog"
 }
-const schema = mongoose.Schema(
-  {
-      lossDate: Date,
+const schema = mongoose.Schema({
+      loss_date: Date,
+      found_date: Date,
+      adopt_date: Date,
       status_report: String,
-      animal: AnimalSchema
-      },
-  { timestamp: true }
+      animal: Animal,
+      adopted_user: User
+  },
+    { timestamps: true }
 );
 
-export default mongoose.model("Animal", schema);
+export default mongoose.model("AnimalReport", schema);
