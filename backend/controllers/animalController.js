@@ -1,4 +1,4 @@
-import Animal from "../models/animal.js";
+import Animal from "../models/animalModel.js";
 import AnimalService from "../services/animalService.js";
 import {STATUS_ANIMAL, STATUS_REPORT} from "../models/reportAnimalModel.js";
 
