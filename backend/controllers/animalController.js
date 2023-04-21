@@ -1,4 +1,4 @@
-import Animal from "../models/animal.js";
+import Animal from "../models/animalModel.js";
 
 const AnimalController = {
     getAllAnimals: async function (req, res, next) {
