@@ -1,19 +1,31 @@
 import Animal from "../models/animal.js";
+import AnimalService from "../services/animalService.js";
+import {STATUS_ANIMAL, STATUS_REPORT} from "../models/reportAnimalModel.js";
 
 const AnimalController = {
-    getAllAnimals: async function (req, res, next) {
+    getMissingAnimals: async function (req, res, next) {
         try {
-            const result = await Animal.find({});
+            const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.MISSING_REPORT);
+            res.json(result);
+        } catch (e) {
+            next(e);
+        }
+    },
+    getFoundAnimals: async function (req, res, next) {
+        try {
+            const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT);
             res.json(result);
         } catch (e) {
             next(e);
         }
     },
 
-    addAnimal: async function (req, res, next) {
+    addMissingAnimal: async function (req, res, next) {
         try {
-            const newAnimal = req.body;
-            const result = await Animal.create(newAnimal);
+            let newAnimal = req.body;
+            newAnimal.status_report = STATUS_REPORT.MISSING_REPORT;
+            newAnimal.animal.status_animal = STATUS_ANIMAL.MISSING_ANIMAL;
+            const result = await AnimalService.create(newAnimal);
             res.json(result);
         } catch (e) {
             next(e);

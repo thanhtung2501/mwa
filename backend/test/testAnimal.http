@@ -1,25 +1,22 @@
-GET http://localhost:3000/animals
+GET http://localhost:3000/missingAnimals
 
 ###
-POST http://localhost:3000/animals
+POST http://localhost:3000/missingAnimals
 Content-Type: application/json
 
 {
-    "category": "cat",
+  "lossDate": "2022-03-10",
+  "status_report": "MISSING",
+  "animal": {
+    "category": "Cat",
     "name": "Fluffy",
     "breed": "Persian",
     "sex": "female",
     "age": 4,
     "color": "white",
     "weight": 4.5,
-    "status_animal": "MISSING",
-    "report": [
-      {
-        "createDate": "2022-03-10",
-        "lossDate": "2022-03-05",
-        "status_report": "MISSING"
-      }
-    ],
+    "status_animal": "MISSING"
+  },
     "image": []
   }
 
