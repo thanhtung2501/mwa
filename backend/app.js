@@ -11,7 +11,7 @@ import checkToken from './middlewares/checkToken.js';
 // init
 const app = express();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`, { useNewUrlParser: true });
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
 console.log('DB Connected successfully!!!!');
 
 // app config
@@ -38,5 +38,4 @@ app.use((error, req, res, next) => {
 
 app.listen(3000, () => {
     console.log('server is running ...');
-    // mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`, { useNewUrlParser: true });
 });
