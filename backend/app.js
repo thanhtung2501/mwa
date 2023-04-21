@@ -11,7 +11,7 @@ import animalRouter from './routes/animalReportRouter.js';
 // init
 const app = express();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
+await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
 console.log('DB Connected successfully!!!!');
 
 // app config
