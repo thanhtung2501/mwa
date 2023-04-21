@@ -5,12 +5,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import imageRouter from './routes/imageRouters.js';
 import userRouter from './routes/userRouter.js';
+import checkToken from './middlewares/checkToken.js';
 import animalRouter from './routes/animalReportRouter.js';
 
 // init
 const app = express();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`, { useNewUrlParser: true });
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
 console.log('DB Connected successfully!!!!');
 
 // app config
@@ -23,7 +24,8 @@ dotenv.config();
 
 // routes
 app.use('/images', imageRouter);
-app.use('/animalReports', animalRouter);
+app.use('/users', userRouter);
+app.use('/animalReports', checkToken.validateToken, animalRouter);
 
 // error handlers 
 app.all('*', (req, res, next) => {
@@ -35,6 +37,5 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(3000, () => {
-    console.log('server is running ... port 3000');
-    // mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`, { useNewUrlParser: true });
+    console.log('server is running ...');
 });
