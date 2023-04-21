@@ -1,15 +1,11 @@
 import { Router } from "express";
 
-import AnimalReportController from "../controllers/animalReportController.js";
+import AnimalController from "../controllers/animalReportController.js";
 const router = Router();
 
-router.get("/missingAnimal", AnimalReportController.getMissingAnimals);
-router.post("/missingAnimal", AnimalReportController.addMissingAnimal);
-router.get("/foundAnimal", AnimalReportController.getFoundAnimals);
-router.post("/foundAnimal", AnimalReportController.addFoundAnimal);
-router.get("/adoptAnimal", AnimalReportController.getAdoptAnimals);
-router.post("/adoptAnimal", AnimalReportController.addAdoptAnimal);
-router.get("/:animal_report_id", AnimalReportController.getAnimalByID);
-router.patch("/:animal_report_id", AnimalReportController.updateAnimal);
-router.delete("/:animal_report_id", AnimalReportController.deleteAnimal);
+router.get("", AnimalController.getAnimalsByStatus);
+router.post("", AnimalController.getAnimalsByStatus);
+router.get("/:animal_id", AnimalController.getAnimalByID);
+router.patch("/:animal_id", AnimalController.updateAnimal);
+router.delete("/:animal_id", AnimalController.deleteAnimal);
 export default router;

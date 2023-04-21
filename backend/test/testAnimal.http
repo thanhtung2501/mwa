@@ -1,61 +1,59 @@
-GET http://localhost:3000/animalReports/missingAnimal
+GET http://localhost:3000/animals
 
 ###
-POST http://localhost:3000/animalReports/missingAnimal
+GET http://localhost:3000/animals?action=listMissingAnimals
+
+###
+POST http://localhost:3000/animals?action=addMissingAnimal
 Content-Type: application/json
 
 {
+  "category": "Cat 2",
+  "name": "Fluffy",
+  "breed": "Persian",
+  "sex": "female",
+  "age": 4,
+  "color": "white",
+  "weight": 4.5,
   "loss_date": "2022-03-10",
-  "animal": {
-    "category": "Cat",
-    "name": "Fluffy",
-    "breed": "Persian",
-    "sex": "female",
-    "age": 4,
-    "color": "white",
-    "weight": 4.5
-  },
-    "image": []
-  }
-
-###
-GET http://localhost:3000/animalReports/foundAnimal
-
-###
-POST http://localhost:3000/animalReports/foundAnimal
-Content-Type: application/json
-
-{
-  "found_date": "2022-03-10",
-  "animal": {
-    "category": "Cat",
-    "name": "Fluffy",
-    "breed": "Persian",
-    "sex": "female",
-    "age": 4,
-    "color": "white",
-    "weight": 4.5
-  },
   "image": []
 }
-###
-GET http://localhost:3000/animalReports/adoptAnimal
 
 ###
-POST http://localhost:3000/animalReports/adoptAnimal
+GET http://localhost:3000/animals?action=listFoundAnimalS
+
+###
+POST http://localhost:3000/animals?action=addFoundAnimal
 Content-Type: application/json
 
 {
-  "adopt_date": "2022-03-10",
-  "animal": {
-    "category": "Cat S",
-    "name": "Fluffy",
-    "breed": "Persian",
-    "sex": "female",
-    "age": 4,
-    "color": "white",
-    "weight": 4.5
-  },
+  "category": "Cat",
+  "name": "Fluffy",
+  "breed": "Persian",
+  "sex": "female",
+  "age": 4,
+  "color": "white",
+  "weight": 4.5,
+  "found_date": "2022-03-10",
+  "image": []
+}
+
+###
+GET http://localhost:3000/animals?action=listAdoptAnimals
+
+###
+POST http://localhost:3000/animals?action=addAdoptAnimal
+Content-Type: application/json
+
+{
+  "category": "Cat A",
+  "name": "Fluffy",
+  "breed": "Persian",
+  "sex": "female",
+  "age": 4,
+  "color": "white",
+  "weight": 4.5,
+  "adopt_date": "2022-04-10",
   "adopted_user": {
     "_id": "6441eb8d48bbb95331a8c8d4",
     "name": "Thao",
@@ -67,11 +65,21 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/animalReports/6442ba687b340c291437be7d
+GET http://localhost:3000/animals/64430157eb98ef6e8501c71f
 
 ###
-PATCH http://localhost:3000/animalReports/6442ba687b340c291437be7d
+PATCH http://localhost:3000/animals/64430157eb98ef6e8501c71f
+Content-Type: application/json
+
+{
+    "name": "Tom",
+    "breed": "Persian 1",
+    "sex": "male",
+    "age": 3,
+    "color": "red",
+    "weight": 5
+}
 
 ###
-DELETE  http://localhost:3000/animalReports/6442ba687b340c291437be7d
+DELETE  http://localhost:3000/animals/6442f2058a1be9d5d5b8e846
 Content-Type: application/json

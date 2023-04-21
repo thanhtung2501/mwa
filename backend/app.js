@@ -25,11 +25,12 @@ dotenv.config();
 // routes
 app.use('/images', imageRouter);
 app.use('/users', userRouter);
-app.use('/animalReports', checkToken.validateToken, animalRouter);
+// app.use('/animals', checkToken.validateToken, animalRouter);
+app.use('/animals', animalRouter);
 
 // error handlers 
 app.all('*', (req, res, next) => {
-    next(new Error('Route not found 1'));
+    next(new Error('Route not found'));
 });
 
 app.use((error, req, res, next) => {
