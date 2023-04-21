@@ -11,7 +11,7 @@ const UserController = {
             const { email, password } = req.body;
             const user = await User.findOne({ email });
             if (user) {
-                const match = bcrypt.compare(password, user.password);
+                const match = await bcrypt.compare(password, user.password);
                 if (match) {
                     const jwtToken = jwt.sign({
                         ...user,
