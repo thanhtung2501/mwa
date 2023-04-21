@@ -1,8 +1,14 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose.Schema({
+export const User = new mongoose.Schema({
     "name": { type: String, require: true },
-    "addressId": mongoose.Types.ObjectId,
+    "address": {
+        "street": String,
+        "city": String,
+        "zipCode": String,
+        "state": String,
+        "location": [Number]
+    },
     "phoneNumber": String,
     "email": String,
     "password": String
@@ -10,4 +16,4 @@ const schema = new mongoose.Schema({
     timestamps: true
 });
 
-export default mongoose.model('User', schema);
+export default mongoose.model('User', User);
