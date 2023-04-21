@@ -13,7 +13,7 @@ export const Animal = mongoose.Schema(
         status_animal: String,
         images: [
             {
-                filename: String,
+                file_path: String,
             }
         ]
     }
