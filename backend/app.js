@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import imageRouter from './routes/imageRouters.js';
 import userRouter from './routes/userRouter.js';
 import animalRouter from './routes/animalRouter.js';
+import checkToken from './middlewares/checkToken.js';
 
 // init
 const app = express();
@@ -24,7 +25,7 @@ dotenv.config();
 // routes
 app.use('/images', imageRouter);
 app.use('/users', userRouter);
-app.use('/animals', animalRouter);
+app.use('/animals', checkToken.validateToken, animalRouter);
 
 // error handlers 
 app.all('*', (req, res, next) => {
