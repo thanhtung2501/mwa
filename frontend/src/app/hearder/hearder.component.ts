@@ -17,4 +17,7 @@ export class HearderComponent {
   clickSignup(){
     this.router.navigate(['signup'])
   }
+  clickHome(){
+    this.router.navigate([''])
+  }
 }

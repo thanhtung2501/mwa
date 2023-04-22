@@ -40,6 +40,7 @@ const AnimalService = {
 
     delete: async function (tokenId, animal_id) {
         const result = await Animal.deleteOne({ _id: animal_id, user_id: tokenId });
+        j
     }
 }
 

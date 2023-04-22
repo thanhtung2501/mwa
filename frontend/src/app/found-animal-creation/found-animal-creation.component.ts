@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {NonNullableFormBuilder} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-found-animal-creation',
@@ -7,5 +9,11 @@ import { Component } from '@angular/core';
   ]
 })
 export class FoundAnimalCreationComponent {
+  constructor(private router: Router) {
+  }
+  animalCreationForm = inject(NonNullableFormBuilder).group({})
 
+  onSubmit(){
+    this.router.navigate(['animal-list'])
+  }
 }

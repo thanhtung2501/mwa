@@ -1,9 +1,15 @@
 <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
   <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
-    <div>
-      <h5 class="mr-3 font-semibold dark:text-white">Flowbite Users</h5>
-      <p class="text-gray-500 dark:text-gray-400">Manage all your existing users or add a new one</p>
-    </div>
+    <a [routerLink]="['']">
+      <div>
+        <h5 class="mr-3 font-semibold dark:text-white">Pet Rescue</h5>
+        <p class="text-gray-500 dark:text-gray-400">Rescue poor pets which are abandoned</p>
+      </div>
+    </a>
+    <button type="button" (click)="clickHome()"
+            class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
+      Home
+    </button>
     <button type="button" (click)="clickLogin()"
             class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
       Login
