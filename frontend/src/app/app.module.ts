@@ -12,7 +12,11 @@ import { MissingAnimalCreationComponent } from './missing-animal-creation/missin
 import { FoundAnimalCreationComponent } from './found-animal-creation/found-animal-creation.component';
 import { AnimalListComponent } from './animal-list/animal-list.component';
 import { AnimalItemComponent } from './animal-item/animal-item.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    // CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
