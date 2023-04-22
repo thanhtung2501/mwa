@@ -12,10 +12,10 @@ export class UserService {
   private http = inject(HttpClient);
 
   login(data: IUser) {
-    return this.http.post(environment.HTTP_SERVER + '/users/login', data);
+    return this.http.post<{ success: true, data: string }>(environment.HTTP_SERVER + '/users/login', data);
   }
 
   signup(user: IUser) {
-    return this.http.post(environment.HTTP_SERVER + '/users/signup', user);
+    return this.http.post<{ success: true, data: IUser }>(environment.HTTP_SERVER + '/users/signup', user);
   }
 }

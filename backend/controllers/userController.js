@@ -36,6 +36,7 @@ const UserController = {
     signup: async function (req, res, next) {
         try {
             const newUser = req.body;
+            console.log(newUser);
             const { password: plainPassword } = newUser;
             const hashPassword = await bcrypt.hash(plainPassword, 10);
 
@@ -49,6 +50,7 @@ const UserController = {
                 data: result
             });
         } catch (error) {
+            console.log(error)
             next(error);
         }
     }
