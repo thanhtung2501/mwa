@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {IAnimal} from "../IAnimal";
 
 @Component({
   selector: 'app-animal-item',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class AnimalItemComponent {
+export class AnimalItemComponent implements OnInit{
+  @Input() animal: any;
+
+  ngOnInit() {
+    console.log(this.animal)
+  }
+
 }

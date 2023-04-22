@@ -15,7 +15,6 @@ export class AnimalListComponent {
     this.animalService.getMissingAnimals().subscribe((res) => {
       if (res.length > 0) {
         this.animals = res;
-        console.log(this.animals)
       }
     })
   }
