@@ -1,10 +1,15 @@
 import { Router } from "express";
-
+import multer from 'multer';
 import AnimalController from "../controllers/animalReportController.js";
+
+const upload = multer({
+    dest: 'uploads/'
+});
+
 const router = Router();
 
-router.get("", AnimalController.getAnimalsByStatus);
-router.post("", AnimalController.getAnimalsByStatus);
+router.get("", AnimalController.performAnimalsByStatus);
+router.post("", upload.single('image'), AnimalController.performAnimalsByStatus);
 router.get("/:animal_id", AnimalController.getAnimalByID);
 router.patch("/:animal_id", AnimalController.updateAnimal);
 router.delete("/:animal_id", AnimalController.deleteAnimal);

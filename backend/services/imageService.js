@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import { join } from 'path';
 import * as url from 'url';
-import ImageService from '../services/imageService.js';
 
 dotenv.config();
 
@@ -22,13 +21,40 @@ const s3Client = new S3Client({
     credentials: credentials
 });
 
-const ImageController = {
-    addNewPicture: async function (req, res, next) {
-        console.log(req.file);
-        const { animalId } = req.body;
-        const result = await ImageService.addNewPicture(req.file, animalId);
+const ImageService = {
+    addNewPicture: async function (file, animalId) {
+        try {
+            // console.log(req.file);
+            // const { animalId } = req.body;
+            // console.log(animalId);
+            // const file = req.file;
+            const filePath = file.path;
+            const fileContent = fs.readFileSync(filePath);
 
-        return res.json(result);
+            const params = {
+                Bucket: bucketName,
+                Key: file.filename,
+                Body: fileContent
+            };
+
+            const command = new PutObjectCommand(params);
+
+            const result = await s3Client.send(command);
+
+            const imagePath = join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', file.filename);
+            // createReadStream(join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', file.filename));
+
+            return {
+                success: true,
+                data: {
+                    animalId: animalId,
+                    filePath: imagePath,
+                    s3metaData: result
+                }
+            };
+        } catch (error) {
+            next(error);
+        }
     },
 
     getAllImagesFromS3: async function (req, res, next) {
@@ -72,4 +98,4 @@ const ImageController = {
     }
 };
 
-export default ImageController;
+export default ImageService;

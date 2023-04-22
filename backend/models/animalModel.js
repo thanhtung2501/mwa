@@ -16,6 +16,7 @@ export const STATUS_REPORT = {
 
 const Animals = mongoose.Schema(
     {
+        user_id: mongoose.Types.ObjectId,
         category: String,
         name: String,
         breed: String,

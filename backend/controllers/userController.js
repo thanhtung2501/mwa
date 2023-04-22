@@ -9,7 +9,7 @@ const UserController = {
     login: async function (req, res, next) {
         try {
             const { email, password } = req.body;
-            const user = await User.findOne({ email });
+            const user = await User.findOne({ email }).lean();
             if (user) {
                 const match = await bcrypt.compare(password, user.password);
                 if (match) {

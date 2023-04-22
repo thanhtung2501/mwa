@@ -25,8 +25,8 @@ dotenv.config();
 // routes
 app.use('/images', imageRouter);
 app.use('/users', userRouter);
-// app.use('/animals', checkToken.validateToken, animalRouter);
-app.use('/animals', animalRouter);
+app.use('/animals', checkToken.validateToken, animalRouter);
+// app.use('/animals', animalRouter);
 
 // error handlers 
 app.all('*', (req, res, next) => {

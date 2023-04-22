@@ -9,19 +9,20 @@ const AnimalService = {
         return await Animal.create(animalReport);
     },
 
-    getAnimalByReportStatus: async function (status) {
+    getAnimalByReportStatus: async function (status, tokenId) {
         return await Animal.find({
-            status_report: status
+            status_report: status,
+            user_id: tokenId
         });
     },
 
-    getById: async function (animalId) {
-        return await Animal.findOne({ _id: animalId });
+    getById: async function (animalId, tokenId) {
+        return await Animal.findOne({ _id: animalId, user_id: tokenId });
     },
 
-    update: async function (animal_id, name, breed, sex, age, color, weight) {
+    update: async function (tokenId, animal_id, name, breed, sex, age, color, weight) {
         const result = await Animal.updateOne(
-            { _id: animal_id },
+            { _id: animal_id, user_id: tokenId },
             {
                 $set: {
                     name: name,
@@ -37,8 +38,8 @@ const AnimalService = {
         return result;
     },
 
-    delete: async function (animal_id) {
-        const result = await Animal.deleteOne({ _id: animal_id });
+    delete: async function (tokenId, animal_id) {
+        const result = await Animal.deleteOne({ _id: animal_id, user_id: tokenId });
     }
 }
 

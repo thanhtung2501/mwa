@@ -11,10 +11,13 @@ const ANIMAL_ACTION = {
 };
 
 const AnimalController = {
-    getAnimalsByStatus: async function (req, res, next) {
+    performAnimalsByStatus: async function (req, res, next) {
         try {
             const { action } = req.query;
-            console.log(action);
+            console.log(req.token);
+            const tokenId = req.token._id;
+
+            const file = req.file;
 
             if (action === ANIMAL_ACTION.ADD_ADOPT_ANIMAL) {
                 let newAnimalReport = req.body;
@@ -22,6 +25,7 @@ const AnimalController = {
                 newAnimalReport.status_report = STATUS_REPORT.ADOPT_REPORT;
                 newAnimalReport.status_animal = STATUS_ANIMAL.ADOPTED_ANIMAL;
                 newAnimalReport.adopted_user.password = '';
+                newAnimalReport.user_id = tokenId;
 
                 const result = await AnimalService.create(newAnimalReport);
                 return res.json(result);
@@ -32,6 +36,7 @@ const AnimalController = {
 
                 newAnimalReport.status_report = STATUS_REPORT.FOUND_REPORT;
                 newAnimalReport.status_animal = STATUS_ANIMAL.FOUND_ANIMAL;
+                newAnimalReport.user_id = tokenId;
 
                 const result = await AnimalService.create(newAnimalReport);
                 return res.json(result);
@@ -42,23 +47,24 @@ const AnimalController = {
 
                 newAnimalReport.status_report = STATUS_REPORT.MISSING_REPORT;
                 newAnimalReport.status_animal = STATUS_ANIMAL.MISSING_ANIMAL;
+                newAnimalReport.user_id = tokenId;
 
                 const result = await AnimalService.create(newAnimalReport);
                 return res.json(result);
             }
 
             if (action === ANIMAL_ACTION.LIST_ADOPT_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.ADOPT_REPORT);
+                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.ADOPT_REPORT, tokenId);
                 return res.json(result);
             }
 
             if (action === ANIMAL_ACTION.LIST_FOUND_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT);
+                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT, tokenId);
                 return res.json(result);
             }
 
             if (action === ANIMAL_ACTION.LIST_MISSING_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.MISSING_REPORT);
+                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.MISSING_REPORT, tokenId);
                 return res.json(result);
             }
 
@@ -72,7 +78,8 @@ const AnimalController = {
     getAnimalByID: async function (req, res, next) {
         try {
             const { animal_id } = req.params;
-            const result = await AnimalService.getById(animal_id);
+            const tokenId = req.token._id;
+            const result = await AnimalService.getById(animal_id, tokenId);
             res.json(result ? result : {});
         } catch (e) {
             next(e);
@@ -81,9 +88,10 @@ const AnimalController = {
 
     updateAnimal: async function (req, res, next) {
         try {
+            const tokenId = req.token._id;
             const { animal_id } = req.params;
             const { name, breed, sex, age, color, weight } = req.body;
-            const result = await AnimalService.update(animal_id, name, breed, sex, age, color, weight);
+            const result = await AnimalService.update(tokenId, animal_id, name, breed, sex, age, color, weight);
             res.json({
                 success: true,
                 data: result
@@ -95,8 +103,9 @@ const AnimalController = {
 
     deleteAnimal: async function (req, res, next) {
         try {
+            const tokenId = req.token._id;
             const { animal_id } = req.params;
-            const result = AnimalService.delete(animal_id);
+            const result = AnimalService.delete(tokenId, animal_id);
             res.json(result);
         } catch (e) {
             next(e);
