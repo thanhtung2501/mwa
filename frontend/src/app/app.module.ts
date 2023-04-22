@@ -26,7 +26,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     FoundAnimalCreationComponent,
     AnimalListComponent,
     AnimalItemComponent,
-
   ],
   imports: [
     BrowserModule,
