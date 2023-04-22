@@ -11,8 +11,8 @@ import animalRouter from './routes/animalReportRouter.js';
 // init
 const app = express();
 
+await mongoose.connect(`mongodb://localhost:27017/mwa`)
 // await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
-await mongoose.connect(`mongodb://localhost:27017/mwa1`);
 console.log('DB Connected successfully!!!!');
 
 // app config
@@ -26,8 +26,8 @@ dotenv.config();
 // routes
 app.use('/images', imageRouter);
 app.use('/users', userRouter);
-app.use('/animals', checkToken.validateToken, animalRouter);
-// app.use('/animals', animalRouter);
+// app.use('/animals', checkToken.validateToken, animalRouter);
+app.use('/animals', animalRouter);
 
 // error handlers 
 app.all('*', (req, res, next) => {

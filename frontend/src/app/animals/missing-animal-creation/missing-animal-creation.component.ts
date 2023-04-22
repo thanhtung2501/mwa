@@ -13,7 +13,15 @@ export class MissingAnimalCreationComponent {
   constructor(private router: Router) {
   }
 
-  animalCreationForm = inject(NonNullableFormBuilder).group({})
+  animalCreationForm = inject(NonNullableFormBuilder).group({
+    category:[''],
+    name:[],
+    sex:[],
+    breed:[],
+    weight:[],
+    color:[],
+    age:[]
+  })
 
   onSubmit() {
     this.router.navigate(['animal-list'])

@@ -8,12 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { MissingAnimalCreationComponent } from './missing-animal-creation/missing-animal-creation.component';
-import { FoundAnimalCreationComponent } from './found-animal-creation/found-animal-creation.component';
-import { AnimalListComponent } from './animal-list/animal-list.component';
-import { AnimalItemComponent } from './animal-item/animal-item.component';
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,10 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    MissingAnimalCreationComponent,
-    FoundAnimalCreationComponent,
-    AnimalListComponent,
-    AnimalItemComponent,
+
   ],
   imports: [
     BrowserModule,
