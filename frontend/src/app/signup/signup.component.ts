@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
   ]
 })
 export class SignupComponent {
+  form = inject(FormBuilder).nonNullable.group({
+    email: ['', Validators.required],
+    name: ['', Validators.required],
+    phoneNumber: ['', Validators.required],
+    password: ['', Validators.required],
+  });
 
 }

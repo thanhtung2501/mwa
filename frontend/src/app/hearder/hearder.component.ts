@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, inject } from '@angular/core';
+import { Router } from "@angular/router";
+import { StateService, init_state } from '../services/state.service';
+import { Subscription } from 'rxjs';
+import { IState } from '../models/state';
 
 @Component({
   selector: 'app-hearder',
@@ -8,13 +11,28 @@ import {Router} from "@angular/router";
   ]
 })
 export class HearderComponent {
+  state!: IState;
+
+  private stateService = inject(StateService);
+  private subscription!: Subscription;
+
   constructor(private router: Router) {
-  }
-  clickLogin(){
-    this.router.navigate(['login'])
+    this.subscription = this.stateService.getState().subscribe(state => {
+      this.state = state;
+    });
   }
 
-  clickSignup(){
-    this.router.navigate(['signup'])
+  clickLogin() {
+    this.router.navigate(['', 'login']);
   }
+
+  clickLogout() {
+    this.stateService.setState(init_state);
+    this.router.navigate(['', 'home']);
+  }
+
+  clickSignup() {
+    this.router.navigate(['', 'signup']);
+  }
+
 }
