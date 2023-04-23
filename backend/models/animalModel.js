@@ -48,6 +48,8 @@ const Animals = mongoose.Schema(
                 file_path: String,
             }
         ]
+    },{
+        timestamps: true
     }
 );
 

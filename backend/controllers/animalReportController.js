@@ -19,6 +19,7 @@ const AnimalController = {
             const tokenId = "";
 
             const file = req.file;
+            let result = [];
 
             if (action === ANIMAL_ACTION.ADD_ADOPT_ANIMAL) {
                 let newAnimalReport = req.body;
@@ -28,8 +29,7 @@ const AnimalController = {
                 newAnimalReport.adopted_user.password = '';
                 newAnimalReport.user_id = tokenId;
 
-                const result = await AnimalService.create(newAnimalReport);
-                return res.json(result);
+                result = await AnimalService.create(newAnimalReport);
             }
 
             if (action === ANIMAL_ACTION.ADD_FOUND_ANIMAL) {
@@ -39,8 +39,7 @@ const AnimalController = {
                 newAnimalReport.status_animal = STATUS_ANIMAL.FOUND_ANIMAL;
                 newAnimalReport.user_id = tokenId;
 
-                const result = await AnimalService.create(newAnimalReport);
-                return res.json(result);
+                result = await AnimalService.create(newAnimalReport);
             }
 
             if (action === ANIMAL_ACTION.ADD_MISSING_ANIMAL) {
@@ -50,27 +49,23 @@ const AnimalController = {
                 newAnimalReport.status_animal = STATUS_ANIMAL.MISSING_ANIMAL;
                 newAnimalReport.user_id = tokenId;
 
-                const result = await AnimalService.create(newAnimalReport);
-                return res.json(result);
+                result = await AnimalService.create(newAnimalReport);
             }
 
             if (action === ANIMAL_ACTION.LIST_ADOPT_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.ADOPT_REPORT, tokenId);
-                return res.json(result);
+                result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.ADOPT_REPORT, tokenId);
             }
 
             if (action === ANIMAL_ACTION.LIST_FOUND_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT, tokenId);
-                return res.json(result);
+                result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT, tokenId);
             }
 
             if (action === ANIMAL_ACTION.LIST_MISSING_ANIMALS) {
-                const result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.MISSING_REPORT, tokenId);
-                return res.json(result);
+                result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.MISSING_REPORT, tokenId);
             }
 
-            const result = await AnimalService.getAll();
-            return res.json(result);
+            result = await AnimalService.getAll();
+            return res.json({success: true, data: result});
         } catch (error) {
             next(error);
         }
@@ -81,7 +76,7 @@ const AnimalController = {
             const { animal_id } = req.params;
             const tokenId = req.token._id;
             const result = await AnimalService.getById(animal_id, tokenId);
-            res.json(result ? result : {});
+            res.json(result ? {success: true, data: result} : {});
         } catch (e) {
             next(e);
         }
@@ -107,7 +102,7 @@ const AnimalController = {
             const tokenId = req.token._id;
             const { animal_id } = req.params;
             const result = AnimalService.delete(tokenId, animal_id);
-            res.json(result);
+            res.json({success: true, data: result});
         } catch (e) {
             next(e);
         }
