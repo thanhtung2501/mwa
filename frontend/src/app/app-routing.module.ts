@@ -6,7 +6,7 @@ import { SignupComponent } from "./signup/signup.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: "full" },
-  { path: 'home', component: HomeComponent, title: "Homepage" },
+  { path: 'home', component: HomeComponent, title: "MWA-Group8" },
   { path: 'login', component: LoginComponent, title: "Log in" },
   { path: 'signup', component: SignupComponent, title: "Sign up" },
   {path: 'animals', loadChildren: () => import('./animals/animals.module').then(module => module.AnimalsModule)},

@@ -10,6 +10,7 @@
             class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
       Home
     </button>
+
     <button type="button" (click)="clickLogout()" *ngIf="state._id; else login"
             class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
       Logout
