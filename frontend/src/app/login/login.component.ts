@@ -3,6 +3,11 @@ import { IState } from '../models/state';
 import { StateService } from '../services/state.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, Validators } from '@angular/forms';
+import { IUser } from '../models/user';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +18,41 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   state!: IState;
 
+  private userService = inject(UserService);
+  private router = inject(Router);
+  private notification = inject(ToastrService);
+
   private stateService = inject(StateService);
   private subscription!: Subscription;
 
-  constructor(private router: Router) {
+  form = inject(FormBuilder).nonNullable.group({
+    email: ['', Validators.required],
+    password: ['', Validators.required]
+  });
+
+  constructor() {
     this.subscription = this.stateService.getState().subscribe(state => {
       this.state = state;
     });
+  }
+
+  login() {
+    this.userService.login(this.form.value as IUser).subscribe(res => {
+      if (res.success) {
+        this.notification.success('Successfully logged in.');
+        const encryptedToken = res.data;
+        const decodedToken = jwt_decode(encryptedToken) as IUser;
+
+        const state = {
+          ...decodedToken,
+          jwt: encryptedToken
+        };
+
+        this.stateService.setState(state);
+        localStorage.setItem('APP_STATE', JSON.stringify(state));
+        this.router.navigate(['', 'animals']);
+      }
+    })
   }
 
 }

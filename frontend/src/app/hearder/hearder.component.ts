@@ -28,6 +28,7 @@ export class HearderComponent {
 
   clickLogout() {
     this.stateService.setState(init_state);
+    localStorage.clear();
     this.router.navigate(['', 'home']);
   }
 

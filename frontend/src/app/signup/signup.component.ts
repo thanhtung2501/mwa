@@ -16,7 +16,7 @@ export class SignupComponent {
   private router = inject(Router);
   private notification = inject(ToastrService);
 
-  form = inject(FormBuilder).nonNullable.group({
+  signupForm = inject(FormBuilder).nonNullable.group({
     email: ['', Validators.required],
     name: ['', Validators.required],
     phoneNumber: ['', Validators.required],
@@ -24,7 +24,7 @@ export class SignupComponent {
   });
 
   signup() {
-    this.userService.signup(this.form.value as IUser).subscribe(res => {
+    this.userService.signup(this.signupForm.value as IUser).subscribe(res => {
       if (res.success) {
         this.notification.success('Successfully sign up.');
         this.router.navigate(['', 'login']);
