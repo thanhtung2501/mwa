@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MissingAnimalCreationComponent} from "./missing-animal-creation/missing-animal-creation.component";
-import {FoundAnimalCreationComponent} from "./found-animal-creation/found-animal-creation.component";
-import {AnimalListComponent} from "./animal-list/animal-list.component";
-import {AnimalItemComponent} from "./animal-item/animal-item.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {RouterModule} from "@angular/router";
+import { MissingAnimalCreationComponent } from "./missing-animal-creation/missing-animal-creation.component";
+import { FoundAnimalCreationComponent } from "./found-animal-creation/found-animal-creation.component";
+import { AnimalListComponent } from "./animal-list/animal-list.component";
+import { AnimalItemComponent } from "./animal-item/animal-item.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { UpdateComponent as UpdateAnimalComponent } from './updateAnimal.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {RouterModule} from "@angular/router";
     FoundAnimalCreationComponent,
     AnimalListComponent,
     AnimalItemComponent,
+    UpdateAnimalComponent,
   ],
   imports: [
     CommonModule,

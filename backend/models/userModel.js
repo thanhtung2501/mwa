@@ -10,7 +10,7 @@ export const User = new mongoose.Schema({
         "location": [Number]
     },
     "phoneNumber": String,
-    "email": String,
+    "email": { type: String, unique: true },
     "password": String
 }, {
     timestamps: true

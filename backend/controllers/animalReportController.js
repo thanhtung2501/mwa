@@ -15,8 +15,8 @@ const AnimalController = {
         try {
             const { action } = req.query;
             console.log(req.token);
-            // const tokenId = req.token._id;
-            const tokenId = "";
+            const tokenId = req.token._id;
+            // const tokenId = "";
 
             const file = req.file;
 
