@@ -1,4 +1,5 @@
 export interface IAnimal {
+  _id: string,
   user_id: string,
   category: string,
   name: string,

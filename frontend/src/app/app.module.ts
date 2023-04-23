@@ -9,10 +9,11 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StateService } from './services/state.service';
+import { AddTokenInterceptor } from './add-token.interceptor';
 
 
 function bootstrap(stateService: StateService) {
@@ -43,7 +44,8 @@ function bootstrap(stateService: StateService) {
     ToastrModule.forRoot(),
   ],
   providers: [
-    { provide: APP_INITIALIZER, useFactory: bootstrap, deps: [StateService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: bootstrap, deps: [StateService], multi: true },
+    { provide: HTTP_INTERCEPTORS, multi: true, useClass: AddTokenInterceptor }
   ],
   bootstrap: [AppComponent]
 })

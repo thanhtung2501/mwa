@@ -1,6 +1,6 @@
-import {Component, inject} from '@angular/core';
-import {AnimalsService} from "../animals.service";
-import {IAnimal} from "../IAnimal";
+import { Component, inject } from '@angular/core';
+import { AnimalsService } from "../animals.service";
+import { IAnimal } from "../IAnimal";
 
 @Component({
   selector: 'app-animal-list',
@@ -9,11 +9,13 @@ import {IAnimal} from "../IAnimal";
   ]
 })
 export class AnimalListComponent {
-  private animalService = inject(AnimalsService)
+  private animalService = inject(AnimalsService);
+
   animals!: IAnimal[];
+
   constructor() {
     this.animalService.getMissingAnimals().subscribe((res) => {
-      if (res.success === true) {
+      if (res.success) {
         this.animals = res.data;
       }
     })

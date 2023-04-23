@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-update',
+  selector: 'app-animals',
   template: `
     <p>
-      update works!
+      animals works!
     </p>
   `,
   styles: [
   ]
 })
-export class UpdateAnimalComponent {
+export class AnimalComponent {
 
 }
