@@ -13,7 +13,7 @@ const AnimalService = {
         return await Animal.find({
             status_report: status,
             user_id: tokenId
-        });
+        }) .sort({updatedAt: 1});
     },
 
     getById: async function (animalId, tokenId) {

@@ -25,7 +25,7 @@ export interface IAnimal {
     email: string,
     password: string
   },
-  images: [
+  images?: [
     {
       file_path: string,
     }

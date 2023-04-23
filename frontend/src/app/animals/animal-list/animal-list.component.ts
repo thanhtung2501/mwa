@@ -13,8 +13,8 @@ export class AnimalListComponent {
   animals!: IAnimal[];
   constructor() {
     this.animalService.getMissingAnimals().subscribe((res) => {
-      if (res.length > 0) {
-        this.animals = res;
+      if (res.success === true) {
+        this.animals = res.data;
       }
     })
   }
