@@ -1,9 +1,10 @@
 import { S3Client, PutObjectCommand, ListBucketsCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
-import fs from 'fs';
+import fs, { createReadStream } from 'fs';
 import { join } from 'path';
 import * as url from 'url';
 import ImageService from '../services/imageService.js';
+import AnimalService from '../services/animalService.js';
 
 dotenv.config();
 
@@ -24,9 +25,7 @@ const s3Client = new S3Client({
 
 const ImageController = {
     addNewPicture: async function (req, res, next) {
-        console.log(req.file);
-        const { animalId } = req.body;
-        const result = await ImageService.addNewPicture(req.file, animalId);
+        const result = await ImageService.addNewPicture(req.file);
 
         return res.json(result);
     },
@@ -60,12 +59,14 @@ const ImageController = {
         return res.json({ error: "no bucket" });
     },
 
-    getPictureById: function (req, res, next) {
+    getImageByAnimalId: async function (req, res, next) {
         try {
-            const { animalId } = req.params;
-            const animal = getAnimalById(animalId);
-            const imageName = animal.imageName;
-            createReadStream(join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', imageName)).pipe(res);
+            const { animal_id, image_name } = req.params;
+            console.log(animal_id)
+            console.log(image_name)
+            // const tokenId = req.token._id;
+            // const animal = await AnimalService.getById(animal_id, tokenId);
+            createReadStream(join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', image_name)).pipe(res);
         } catch (error) {
             next(error);
         }

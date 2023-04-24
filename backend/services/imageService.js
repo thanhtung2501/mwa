@@ -22,18 +22,15 @@ const s3Client = new S3Client({
 });
 
 const ImageService = {
-    addNewPicture: async function (file, animalId) {
+    addNewPicture: async function (file) {
         try {
-            // console.log(req.file);
-            // const { animalId } = req.body;
-            // console.log(animalId);
-            // const file = req.file;
             const filePath = file.path;
             const fileContent = fs.readFileSync(filePath);
+            const image_name = file.filename;
 
             const params = {
                 Bucket: bucketName,
-                Key: file.filename,
+                Key: image_name,
                 Body: fileContent
             };
 
@@ -41,19 +38,15 @@ const ImageService = {
 
             const result = await s3Client.send(command);
 
-            const imagePath = join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', file.filename);
-            // createReadStream(join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', file.filename));
-
             return {
                 success: true,
                 data: {
-                    animalId: animalId,
-                    filePath: imagePath,
+                    imageName: image_name,
                     s3metaData: result
                 }
             };
         } catch (error) {
-            next(error);
+            return new Error(error);
         }
     },
 
