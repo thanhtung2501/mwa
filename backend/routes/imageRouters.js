@@ -9,6 +9,5 @@ const upload = multer({
 });
 
 router.post('/', upload.single('image'), imageController.addNewPicture);
-router.get('/:animal_id/:image_name', imageController.getImageByAnimalId);
 
 export default router;

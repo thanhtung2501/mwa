@@ -14,7 +14,6 @@ const AnimalController = {
     performAnimalsByStatus: async function (req, res, next) {
         try {
             const { action } = req.query;
-            // console.log(req.token);
             const tokenId = req.token._id;
 
             let result = [];

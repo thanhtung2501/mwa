@@ -42,7 +42,8 @@ const Animals = mongoose.Schema(
             email: String,
             password: String
         },
-        image_name: String
+        image_name: String,
+        image_url: String
     }, {
     timestamps: true
 }

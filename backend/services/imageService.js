@@ -28,21 +28,22 @@ const ImageService = {
             const fileContent = fs.readFileSync(filePath);
             const image_name = file.filename;
 
-            const params = {
-                Bucket: bucketName,
-                Key: image_name,
-                Body: fileContent
-            };
+            // const params = {
+            //     Bucket: bucketName,
+            //     Key: image_name,
+            //     Body: fileContent
+            // };
 
-            const command = new PutObjectCommand(params);
+            // const command = new PutObjectCommand(params);
 
-            const result = await s3Client.send(command);
+            // const result = await s3Client.send(command);
 
             return {
                 success: true,
                 data: {
                     imageName: image_name,
-                    s3metaData: result
+                    imageUrl: 'http://localhost:3000/images/' + image_name,
+                    // s3metaData: result
                 }
             };
         } catch (error) {
