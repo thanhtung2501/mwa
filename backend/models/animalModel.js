@@ -17,7 +17,6 @@ export const STATUS_REPORT = {
 const Animals = mongoose.Schema(
     {
         user_id: mongoose.Types.ObjectId,
-        // user_id: String,
         category: String,
         name: String,
         breed: String,
@@ -43,14 +42,10 @@ const Animals = mongoose.Schema(
             email: String,
             password: String
         },
-        images: [
-            {
-                file_path: String,
-            }
-        ]
-    },{
-        timestamps: true
-    }
+        image_name: String
+    }, {
+    timestamps: true
+}
 );
 
 export default mongoose.model('Animals', Animals);

@@ -9,7 +9,7 @@ const upload = multer({
 const router = Router();
 
 router.get("", AnimalController.performAnimalsByStatus);
-router.post("", upload.single('image'), AnimalController.performAnimalsByStatus);
+router.post("", AnimalController.performAnimalsByStatus);
 router.get("/:animal_id", AnimalController.getAnimalByID);
 router.patch("/:animal_id", AnimalController.updateAnimal);
 router.delete("/:animal_id", AnimalController.deleteAnimal);
