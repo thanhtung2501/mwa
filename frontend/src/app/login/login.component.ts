@@ -16,8 +16,6 @@ import jwt_decode from 'jwt-decode';
   ]
 })
 export class LoginComponent {
-  // state!: IState;
-
   private userService = inject(UserService);
   private router = inject(Router);
   private notification = inject(ToastrService);
@@ -32,7 +30,6 @@ export class LoginComponent {
 
   constructor() {
     this.subscription = this.stateService.getState().subscribe(state => {
-      // this.state = state;
       if (state._id) {
         this.router.navigate(['', 'animals']);
       }

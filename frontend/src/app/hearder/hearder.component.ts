@@ -39,4 +39,8 @@ export class HearderComponent {
   clickHome() {
     this.router.navigate(['', 'home']);
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

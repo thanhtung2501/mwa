@@ -35,7 +35,7 @@ export class MissingAnimalCreationComponent {
     console.log(new_animal)
     this.animalService.addMissingAnimals(new_animal as unknown as IAnimal).subscribe((res) => {
       if (res.success) {
-        this.router.navigate(['', 'animals', 'animal-list'])
+        this.router.navigate(['', 'animals'])
       }
     })
   }
