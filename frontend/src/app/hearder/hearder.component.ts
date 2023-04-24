@@ -28,6 +28,7 @@ export class HearderComponent {
 
   clickLogout() {
     this.stateService.setState(init_state);
+    localStorage.clear();
     this.router.navigate(['', 'home']);
   }
 
@@ -37,5 +38,9 @@ export class HearderComponent {
 
   clickHome() {
     this.router.navigate(['', 'home']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

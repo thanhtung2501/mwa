@@ -17,6 +17,14 @@ export class StateService {
     this._state.next(new_state);
     return this._state.value;
   }
+
+  isLoggedIn() {
+    return this._state.value._id ? true : false;
+  }
+
+  getToken() {
+    return this._state.value.jwt || '';
+  }
 }
 
 export const init_state = {
