@@ -14,11 +14,4 @@ export class AnimalListComponent {
   @Input() listDescription: String = ""
   @Input() animals: IAnimal[] = []
 
-
-
-
-  constructor() {
-
-  }
-
 }

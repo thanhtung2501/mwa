@@ -3,14 +3,15 @@ import {AnimalsService} from "../animals.service";
 import {IAnimal} from "../IAnimal";
 
 @Component({
-  selector: 'app-missing-animal-list',
+  selector: 'app-available-animal-list',
   template: `
-    <app-animal-list [listName]="'Missing animals'"
-    [animals]="animals"></app-animal-list>`,
+    <app-animal-list [listName]="'Found animals'"
+                     [animals]="animals"></app-animal-list>
+  `,
   styles: [
   ]
 })
-export class MissingAnimalListComponent {
+export class AvailableAnimalListComponent {
   private animalService = inject(AnimalsService);
   animals!: IAnimal[];
 
@@ -19,11 +20,10 @@ export class MissingAnimalListComponent {
   }
 
   loadAnimals(){
-    this.animalService.getMissingAnimals().subscribe((res) => {
+    this.animalService.getAllAnimals().subscribe((res) => {
       if (res.success) {
         this.animals = res.data;
       }
     })
   }
-
 }

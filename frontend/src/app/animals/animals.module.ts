@@ -10,6 +10,8 @@ import { UpdateAnimalComponent } from './updateAnimal.component';
 import { AnimalComponent } from './animal.component';
 import { MissingAnimalCreationComponent } from './missing-animal-creation/missing-animal-creation.component';
 import { MissingAnimalListComponent } from './missing-animal-list/missing-animal-list.component';
+import { FoundAnimalListComponent } from './found-animal-list/found-animal-list.component';
+import { AvailableAnimalListComponent } from './available-animal-list/available-animal-list.component';
 
 
 @NgModule({
@@ -22,15 +24,18 @@ import { MissingAnimalListComponent } from './missing-animal-list/missing-animal
     AnimalComponent,
     MissingAnimalCreationComponent,
     MissingAnimalListComponent,
+    FoundAnimalListComponent,
+    AvailableAnimalListComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '', component: AnimalListComponent, title: "Animal list" },
+      { path: '', component: AvailableAnimalListComponent, title: "Animal list" },
       { path: 'create-missing-animal', component: MissingAnimalCreationComponent, title: "Create missing animal" },
       { path: 'create-found-animal', component: FoundAnimalCreationComponent, title: "Create found animal" },
-      // { path: 'animal-list', component: AnimalListComponent, title: "Animal list" },
+      { path: 'missing-animal-list', component: MissingAnimalListComponent, title: "Missing animal list" },
+      { path: 'found-animal-list', component: FoundAnimalListComponent, title: "Found animal list" },
       { path: 'update/:animal_id', component: UpdateAnimalComponent, title: "Update animal" },
       { path: ':animal_id', component: AnimalComponent, title: "Animal details" }
     ])
