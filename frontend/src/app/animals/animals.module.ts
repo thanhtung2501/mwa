@@ -6,12 +6,12 @@ import { AnimalListComponent } from "./animal-list/animal-list.component";
 import { AnimalItemComponent } from "./animal-item/animal-item.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
-import { UpdateAnimalComponent } from './updateAnimal.component';
 import { AnimalComponent } from './animal.component';
 import { MissingAnimalCreationComponent } from './missing-animal-creation/missing-animal-creation.component';
 import { MissingAnimalListComponent } from './missing-animal-list/missing-animal-list.component';
 import { FoundAnimalListComponent } from './found-animal-list/found-animal-list.component';
 import { AvailableAnimalListComponent } from './available-animal-list/available-animal-list.component';
+import { AnimalEditionComponent } from './animal-edition/animal-edition.component';
 
 
 @NgModule({
@@ -20,12 +20,12 @@ import { AvailableAnimalListComponent } from './available-animal-list/available-
     FoundAnimalCreationComponent,
     AnimalListComponent,
     AnimalItemComponent,
-    UpdateAnimalComponent,
     AnimalComponent,
     MissingAnimalCreationComponent,
     MissingAnimalListComponent,
     FoundAnimalListComponent,
     AvailableAnimalListComponent,
+    AnimalEditionComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +36,7 @@ import { AvailableAnimalListComponent } from './available-animal-list/available-
       { path: 'create-found-animal', component: FoundAnimalCreationComponent, title: "Create found animal" },
       { path: 'missing-animal-list', component: MissingAnimalListComponent, title: "Missing animal list" },
       { path: 'found-animal-list', component: FoundAnimalListComponent, title: "Found animal list" },
-      { path: 'update/:animal_id', component: UpdateAnimalComponent, title: "Update animal" },
+      { path: 'update/:animal_id', component: AnimalEditionComponent, title: "Update animal" },
       { path: ':animal_id', component: AnimalComponent, title: "Animal details" }
     ])
   ]

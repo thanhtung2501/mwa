@@ -1,5 +1,6 @@
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
 import { NonNullableFormBuilder, Validators } from "@angular/forms";
+import {IAnimal} from "../IAnimal";
 
 @Component({
   selector: 'app-animal-creation',
@@ -7,9 +8,10 @@ import { NonNullableFormBuilder, Validators } from "@angular/forms";
   styles: [
   ]
 })
-export class AnimalCreationComponent {
+export class AnimalCreationComponent implements OnInit{
 
   @Input() animalCreationType: String = ""
+  @Input() animalInitData = null
   @Output() performSubmit =  new EventEmitter<any>();
 
   animalCreationForm = inject(NonNullableFormBuilder).group({
@@ -31,5 +33,12 @@ export class AnimalCreationComponent {
       user_id: ""
     }
     this.performSubmit.emit(new_animal);
+  }
+
+  ngOnInit() {
+    if(this.animalInitData != null){
+      this.animalCreationForm.value.age = "123"
+      this.animalCreationForm.value.name = "909090 Thao"
+    }
   }
 }
