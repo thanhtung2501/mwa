@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IAnimal } from "../IAnimal";
 
 @Component({
   selector: 'app-animal-item',
@@ -11,12 +10,8 @@ export class AnimalItemComponent implements OnInit {
   @Input() animal: any;
   imageSource: any;
 
-  constructor() {
-    this.imageSource = 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
-  }
-
   ngOnInit() {
-    console.log(this.animal)
+    this.imageSource = this.animal.image_url ? this.animal.image_url : 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
   }
 
 }

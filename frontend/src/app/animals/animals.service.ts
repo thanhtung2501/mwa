@@ -47,6 +47,10 @@ export class AnimalsService {
   updateAnimal(animal: IAnimal) {
     return this.http.patch(environment.HTTP_SERVER + '/animals/' + animal._id, animal);
   }
+
+  uploadAnimalImage(file: any) {
+    return this.http.post<{ success: boolean, data: any }>(environment.HTTP_SERVER + '/images', file);
+  }
 }
 
 

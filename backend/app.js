@@ -7,11 +7,12 @@ import imageRouter from './routes/imageRouters.js';
 import userRouter from './routes/userRouter.js';
 import checkToken from './middlewares/checkToken.js';
 import animalRouter from './routes/animalReportRouter.js';
+import path from 'path';
 
 // init
 const app = express();
 
-await mongoose.connect(`mongodb://localhost:27017/mwa`)
+await mongoose.connect(`mongodb://localhost:27017/mwa1`)
 // await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
 console.log('DB Connected successfully!!!!');
 
@@ -22,6 +23,9 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(json());
 dotenv.config();
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+app.use('/images', express.static(path.join(__dirname, 'uploads')));
 
 // routes
 // app.use('/images', imageRouter);
