@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MissingAnimalCreationComponent } from "./missing-animal-creation/missing-animal-creation.component";
+import { AnimalCreationComponent } from "./animal-creation/animal-creation.component";
 import { FoundAnimalCreationComponent } from "./found-animal-creation/found-animal-creation.component";
 import { AnimalListComponent } from "./animal-list/animal-list.component";
 import { AnimalItemComponent } from "./animal-item/animal-item.component";
@@ -8,16 +8,20 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { UpdateAnimalComponent } from './updateAnimal.component';
 import { AnimalComponent } from './animal.component';
+import { MissingAnimalCreationComponent } from './missing-animal-creation/missing-animal-creation.component';
+import { MissingAnimalListComponent } from './missing-animal-list/missing-animal-list.component';
 
 
 @NgModule({
   declarations: [
-    MissingAnimalCreationComponent,
+    AnimalCreationComponent,
     FoundAnimalCreationComponent,
     AnimalListComponent,
     AnimalItemComponent,
     UpdateAnimalComponent,
     AnimalComponent,
+    MissingAnimalCreationComponent,
+    MissingAnimalListComponent,
   ],
   imports: [
     CommonModule,

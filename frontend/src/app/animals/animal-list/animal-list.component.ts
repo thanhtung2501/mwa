@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import { AnimalsService } from "../animals.service";
 import { IAnimal } from "../IAnimal";
 
@@ -9,16 +9,16 @@ import { IAnimal } from "../IAnimal";
   ]
 })
 export class AnimalListComponent {
-  private animalService = inject(AnimalsService);
 
-  animals!: IAnimal[];
+  @Input() listName: String = "List name"
+  @Input() listDescription: String = ""
+  @Input() animals: IAnimal[] = []
+
+
+
 
   constructor() {
-    this.animalService.getAllAnimals().subscribe((res) => {
-      if (res.success) {
-        this.animals = res.data;
-      }
-    })
+
   }
 
 }
