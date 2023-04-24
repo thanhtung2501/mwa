@@ -26,7 +26,7 @@ import { AnimalComponent } from './animal.component';
       { path: '', component: AnimalListComponent, title: "Animal list" },
       { path: 'create-missing-animal', component: MissingAnimalCreationComponent, title: "Create missing animal" },
       { path: 'create-found-animal', component: FoundAnimalCreationComponent, title: "Create found animal" },
-      { path: 'animal-list', component: AnimalListComponent, title: "Animal list" },
+      // { path: 'animal-list', component: AnimalListComponent, title: "Animal list" },
       { path: 'update/:animal_id', component: UpdateAnimalComponent, title: "Update animal" },
       { path: ':animal_id', component: AnimalComponent, title: "Animal details" }
     ])

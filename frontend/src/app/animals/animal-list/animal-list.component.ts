@@ -14,7 +14,7 @@ export class AnimalListComponent {
   animals!: IAnimal[];
 
   constructor() {
-    this.animalService.getMissingAnimals().subscribe((res) => {
+    this.animalService.getAllAnimals().subscribe((res) => {
       if (res.success) {
         this.animals = res.data;
       }
