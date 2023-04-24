@@ -9,7 +9,6 @@ const upload = multer({
 });
 
 router.post('/', upload.single('image'), imageController.addNewPicture);
-router.get('/:imageId', imageController.getPictureById);
-router.get('/', imageController.getAllImagesFromS3);
+router.get('/:animal_id/:image_name', imageController.getImageByAnimalId);
 
 export default router;

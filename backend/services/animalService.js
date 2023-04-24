@@ -6,17 +6,39 @@ const AnimalService = {
     },
 
     create: async function (animalReport) {
-        return await Animal.create(animalReport);
+        const animalId = animalReport._id;
+        const userId = animalReport.user_id;
+        const animal = await this.getById(animalId, userId);
+
+        if (animal) {
+            console.log('==========found ')
+            const adopted_user = animalReport.adopted_user;
+            console.log('adopted_user', adopted_user);
+            return await Animal.updateOne(
+                { _id: animalId, user_id: userId },
+                {
+                    $set: {
+                        status_report: animalReport.status_report,
+                        status_animal: animalReport.status_animal,
+                        adopted_user: adopted_user
+                    }
+                }
+            );
+        } else {
+            return await Animal.create(animalReport);
+        }
     },
 
     getAnimalByReportStatus: async function (status, tokenId) {
         return await Animal.find({
             status_report: status,
             user_id: tokenId
-        }) .sort({updatedAt: 1});
+        }).sort({ updatedAt: 1 });
     },
 
     getById: async function (animalId, tokenId) {
+        // console.log(animalId)
+        // console.log(tokenId)
         return await Animal.findOne({ _id: animalId, user_id: tokenId });
     },
 
