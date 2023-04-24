@@ -1,6 +1,7 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from "@angular/forms";
 import { AnimalsService } from '../animals.service';
+import {IAnimal} from "../IAnimal";
 
 @Component({
   selector: 'app-animal-creation',
@@ -8,10 +9,11 @@ import { AnimalsService } from '../animals.service';
   styles: [
   ]
 })
-export class AnimalCreationComponent {
+export class AnimalCreationComponent implements OnInit{
 
   @Input() animalCreationType: String = ""
-  @Output() performSubmit = new EventEmitter<any>();
+  @Input() animalInitData = null
+  @Output() performSubmit =  new EventEmitter<any>();
 
   private animalService = inject(AnimalsService);
 
@@ -41,6 +43,13 @@ export class AnimalCreationComponent {
       image_url: this.animalImageURL
     };
     this.performSubmit.emit(new_animal);
+  }
+
+  ngOnInit() {
+    if(this.animalInitData != null){
+      this.animalCreationForm.value.age = "123"
+      this.animalCreationForm.value.name = "909090 Thao"
+    }
   }
 
   getFileSelected(event: Event) {

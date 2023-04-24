@@ -6,7 +6,13 @@
     </div>
     <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
       <div *ngFor="let animal of animals"  >
-        <app-animal-item [animal]="animal" ></app-animal-item>
+        <app-animal-item
+          [animal]="animal"
+          [showAdoptButton]="showAdoptButton"
+          (onDelete)="onDeleteFunc($event)"
+          (onUpdate)="onUpdateFunc($event)"
+          [isEditable]="isEditable"
+        ></app-animal-item>
       </div>
     </div>
   </div>

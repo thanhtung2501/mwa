@@ -1,18 +1,24 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {AnimalsService} from "../animals.service";
 import {IAnimal} from "../IAnimal";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-available-animal-list',
   template: `
-    <app-animal-list [listName]="'Found animals'"
-                     [animals]="animals"></app-animal-list>
+    <app-animal-list [listName]="'Adopt animals'"
+                     [listDescription]="'Rescue the poor animals'"
+                     [animals]="animals"
+                     [showAdoptButton]=true
+                     [isEditable]=false>
+    </app-animal-list>
   `,
   styles: [
   ]
 })
-export class AvailableAnimalListComponent {
+export class AvailableAnimalListComponent implements OnDestroy{
   private animalService = inject(AnimalsService);
+  private subscription !: Subscription;
   animals!: IAnimal[];
 
   constructor() {
@@ -20,10 +26,14 @@ export class AvailableAnimalListComponent {
   }
 
   loadAnimals(){
-    this.animalService.getAllAnimals().subscribe((res) => {
+    this.subscription = this.animalService.getAllAnimals().subscribe((res) => {
       if (res.success) {
         this.animals = res.data;
       }
     })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }
