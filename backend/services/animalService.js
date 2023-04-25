@@ -11,13 +11,20 @@ const AnimalService = {
         const animal = await this.getById(animalId, userId);
 
         if (animal) {
-            console.log('==========found ')
             const adopted_user = animalReport.adopted_user;
-            console.log('adopted_user', adopted_user);
             return await Animal.updateOne(
                 { _id: animalId, user_id: userId },
                 {
                     $set: {
+                        adopt_date: animalReport.adopt_date,
+                        found_date: animalReport.found_date,
+                        loss_date: animalReport.loss_date,
+                        name: animalReport.name,
+                        breed: animalReport.breed,
+                        sex: animalReport.sex,
+                        age: animalReport.age,
+                        color: animalReport.color,
+                        weight: animalReport.weight,
                         status_report: animalReport.status_report,
                         status_animal: animalReport.status_animal,
                         adopted_user: adopted_user
