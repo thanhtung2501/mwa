@@ -23,7 +23,7 @@ export class LoginComponent implements OnDestroy {
   private subscription!: Subscription;
 
   form = inject(FormBuilder).nonNullable.group({
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 
