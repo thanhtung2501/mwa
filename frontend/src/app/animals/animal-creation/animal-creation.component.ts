@@ -8,29 +8,22 @@ import {IAnimal} from "../IAnimal";
   styles: [
   ]
 })
-export class AnimalCreationComponent implements OnInit {
+export class AnimalCreationComponent {
 
   @Input() animalCreationType: String = ""
   @Output() performSubmit =  new EventEmitter<any>();
 
   animalCreationForm = inject(NonNullableFormBuilder).group({
-    category: ['', Validators.required],
-    name: ['', Validators.required],
+    category: ['Cat', Validators.required],
+    name: ['Theo', Validators.required],
     loss_date:[new Date(), Validators.required],
     found_date:[new Date()],
-    sex: ['Female'],
-    breed: [''],
-    weight: ['', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['', Validators.required],
-    age: ['', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    sex: [''],
+    breed: ['Theo1'],
+    weight: ['1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
+    color: ['pink', Validators.required],
+    age: ['1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
   })
-
-  ngOnInit() {
-    this.animalCreationForm.patchValue({
-      sex: 'Male',
-      category: 'Dog'
-    })
-  }
 
   onSubmit() {
     let new_animal = {
