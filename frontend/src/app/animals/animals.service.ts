@@ -48,10 +48,15 @@ export class AnimalsService {
     return this.http.patch(environment.HTTP_SERVER + '/animals/' + animal_id, animal);
   }
 
+  uploadAnimalImage(file: any) {
+    return this.http.post<{ success: boolean, data: any }>(environment.HTTP_SERVER + '/images', file);
+  }
+
   getAnimalById(animal_id: string){
     return this.http.get<{success: true, data: IAnimal}>(environment.HTTP_SERVER + '/animals/' + animal_id);
 
-  }}
+  }
+}
 
 
 

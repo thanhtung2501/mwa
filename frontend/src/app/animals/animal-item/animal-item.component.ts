@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { IAnimal } from "../IAnimal";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-animal-item',
@@ -7,7 +6,7 @@ import { IAnimal } from "../IAnimal";
   styles: [
   ]
 })
-export class AnimalItemComponent {
+export class AnimalItemComponent implements OnInit {
   @Input() animal: any;
 
   imageSource: any;
@@ -18,8 +17,8 @@ export class AnimalItemComponent {
   @Output() onUpdate = new EventEmitter();
   @Output() onAccept = new EventEmitter();
 
-  constructor() {
-    this.imageSource = 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
+  ngOnInit() {
+    this.imageSource = this.animal.image_url ? this.animal.image_url : 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
   }
 
   onDeleteFunc(){

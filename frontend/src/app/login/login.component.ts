@@ -1,5 +1,4 @@
-import {Component, inject, OnDestroy} from '@angular/core';
-import { IState } from '../models/state';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { StateService } from '../services/state.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -15,7 +14,7 @@ import jwt_decode from 'jwt-decode';
   styles: [
   ]
 })
-export class LoginComponent implements OnDestroy{
+export class LoginComponent implements OnDestroy {
   private userService = inject(UserService);
   private router = inject(Router);
   private notification = inject(ToastrService);

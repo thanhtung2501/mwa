@@ -1,6 +1,8 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from "@angular/forms";
-import {IAnimal} from "../IAnimal";
+import { AnimalsService } from '../animals.service';
+import { IAnimal } from "../IAnimal";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-creation',
@@ -12,6 +14,15 @@ export class AnimalCreationComponent {
 
   @Input() animalCreationType: String = ""
   @Output() performSubmit =  new EventEmitter<any>();
+
+  private notification = inject(ToastrService);
+
+  private animalService = inject(AnimalsService);
+
+  private animalImageName: string = '';
+  private animalImageURL: string = '';
+
+  private selectedFile!: File;
 
   animalCreationForm = inject(NonNullableFormBuilder).group({
     category: ['Cat', Validators.required],
@@ -29,8 +40,10 @@ export class AnimalCreationComponent {
     let new_animal = {
       ...this.animalCreationForm.value,
       found_date: this.animalCreationForm.value.loss_date,
-      user_id: ""
-    }
+      user_id: "",
+      image_name: this.animalImageName,
+      image_url: this.animalImageURL
+    };
     this.performSubmit.emit(new_animal);
   }
 }
