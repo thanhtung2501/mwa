@@ -10,8 +10,9 @@ import {Subscription} from "rxjs";
                      [listDescription]="'Rescue the poor animals'"
                      [animals]="animals"
                      [showAdoptButton]=true
-                     [isEditable]=false>
-    </app-animal-list>
+                     [isEditable]=false
+                     (onAccept)="onAcceptFunc($event)"
+    ></app-animal-list>
   `,
   styles: [
   ]
@@ -31,6 +32,15 @@ export class AvailableAnimalListComponent implements OnDestroy{
         this.animals = res.data;
       }
     })
+  }
+
+  onAcceptFunc(animal: IAnimal){
+    // animal.adopted_user = {}
+    console.log(animal);
+    // this.subscription = this.animalService.addAdoptAnimals(animal).subscribe((res) => {
+    //   if (res.success) {
+    //   }
+    // })
   }
 
   ngOnDestroy(){

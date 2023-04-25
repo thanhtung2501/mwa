@@ -12,6 +12,7 @@ import { MissingAnimalListComponent } from './missing-animal-list/missing-animal
 import { FoundAnimalListComponent } from './found-animal-list/found-animal-list.component';
 import { AvailableAnimalListComponent } from './available-animal-list/available-animal-list.component';
 import { AnimalEditionComponent } from './animal-edition/animal-edition.component';
+import { AdoptAnimalModalComponent } from './adopt-animal-modal/adopt-animal-modal.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AnimalEditionComponent } from './animal-edition/animal-edition.componen
     FoundAnimalListComponent,
     AvailableAnimalListComponent,
     AnimalEditionComponent,
+    AdoptAnimalModalComponent,
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 import AnimalService from "../services/animalService.js";
-import animalModel, { STATUS_ANIMAL, STATUS_REPORT } from "../models/animalModel.js";
+import { STATUS_ANIMAL, STATUS_REPORT } from "../models/animalModel.js";
 
 const ANIMAL_ACTION = {
     LIST_MISSING_ANIMALS: "listMissingAnimals",
@@ -14,7 +14,6 @@ const AnimalController = {
     performAnimalsByStatus: async function (req, res, next) {
         try {
             const { action } = req.query;
-            // console.log(req.token);
             const tokenId = req.token._id;
 
             let result = [];
@@ -25,7 +24,6 @@ const AnimalController = {
                 newAnimalReport.status_report = STATUS_REPORT.ADOPT_REPORT;
                 newAnimalReport.status_animal = STATUS_ANIMAL.ADOPTED_ANIMAL;
                 newAnimalReport.user_id = tokenId;
-                console.log('newAdoptAnimal', newAnimalReport)
 
                 result = await AnimalService.create(newAnimalReport);
             } else if (action === ANIMAL_ACTION.ADD_FOUND_ANIMAL) {

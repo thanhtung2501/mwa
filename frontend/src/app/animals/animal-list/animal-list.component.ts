@@ -19,12 +19,17 @@ export class AnimalListComponent {
 
   @Output() onDelete = new EventEmitter();
   @Output() onUpdate = new EventEmitter();
+  @Output() onAccept = new EventEmitter();
 
   onDeleteFunc(animal: IAnimal){
     this.onDelete.emit(animal);
   }
   onUpdateFunc(animal: IAnimal){
     this.onUpdate.emit(animal);
+  }
+
+  onAcceptFunc(animal: IAnimal){
+    this.onAccept.emit(animal);
   }
 
 }

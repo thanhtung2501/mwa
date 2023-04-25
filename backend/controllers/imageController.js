@@ -57,19 +57,6 @@ const ImageController = {
         }
 
         return res.json({ error: "no bucket" });
-    },
-
-    getImageByAnimalId: async function (req, res, next) {
-        try {
-            const { animal_id, image_name } = req.params;
-            console.log(animal_id)
-            console.log(image_name)
-            // const tokenId = req.token._id;
-            // const animal = await AnimalService.getById(animal_id, tokenId);
-            createReadStream(join(url.fileURLToPath(new URL('.', import.meta.url)), '../', 'uploads', image_name)).pipe(res);
-        } catch (error) {
-            next(error);
-        }
     }
 };
 

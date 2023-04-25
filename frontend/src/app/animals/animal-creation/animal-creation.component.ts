@@ -1,6 +1,8 @@
-import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from "@angular/forms";
-import {IAnimal} from "../IAnimal";
+import { AnimalsService } from '../animals.service';
+import { IAnimal } from "../IAnimal";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-creation',
@@ -8,37 +10,40 @@ import {IAnimal} from "../IAnimal";
   styles: [
   ]
 })
-export class AnimalCreationComponent implements OnInit{
+export class AnimalCreationComponent {
 
   @Input() animalCreationType: String = ""
-  @Input() animalInitData = null
   @Output() performSubmit =  new EventEmitter<any>();
 
+  private notification = inject(ToastrService);
+
+  private animalService = inject(AnimalsService);
+
+  private animalImageName: string = '';
+  private animalImageURL: string = '';
+
+  private selectedFile!: File;
+
   animalCreationForm = inject(NonNullableFormBuilder).group({
-    category: ['Dog', Validators.required],
-    name: ['Check 3', Validators.required],
-    loss_date:["", Validators.required],
-    found_date:[],
-    sex: ['Female'],
-    breed: ['Chuki'],
-    weight: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['Pink', Validators.required],
-    age: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    category: ['Cat', Validators.required],
+    name: ['Theo', Validators.required],
+    loss_date:[new Date(), Validators.required],
+    found_date:[new Date()],
+    sex: [''],
+    breed: ['Theo1'],
+    weight: ['1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
+    color: ['pink', Validators.required],
+    age: ['1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
   })
 
   onSubmit() {
     let new_animal = {
       ...this.animalCreationForm.value,
       found_date: this.animalCreationForm.value.loss_date,
-      user_id: ""
-    }
+      user_id: "",
+      image_name: this.animalImageName,
+      image_url: this.animalImageURL
+    };
     this.performSubmit.emit(new_animal);
-  }
-
-  ngOnInit() {
-    if(this.animalInitData != null){
-      this.animalCreationForm.value.age = "123"
-      this.animalCreationForm.value.name = "909090 Thao"
-    }
   }
 }
