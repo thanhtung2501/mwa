@@ -49,7 +49,7 @@ export class LoginComponent implements OnDestroy {
 
         this.stateService.setState(state);
         localStorage.setItem('APP_STATE', JSON.stringify(state));
-        this.router.navigate(['', 'animals']);
+        this.router.navigate(['', 'home']);
       }
     })
   }

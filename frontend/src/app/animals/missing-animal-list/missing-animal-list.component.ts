@@ -1,9 +1,9 @@
-import {Component, inject, OnDestroy} from '@angular/core';
-import {AnimalsService} from "../animals.service";
-import {IAnimal} from "../IAnimal";
-import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { Component, inject, OnDestroy } from '@angular/core';
+import { AnimalsService } from "../animals.service";
+import { IAnimal } from "../IAnimal";
+import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-missing-animal-list',
@@ -11,6 +11,7 @@ import {Subscription} from "rxjs";
     <app-animal-list
       [listName]="'Missing animals'"
       [animals]="animals"
+      [statusAnimal]="'MISSING_ANIMAL'"
       [showAdoptButton]=false
       (onUpdate)="onUpdateFunc($event)"
       (onDelete)="onDeleteFunc($event)"
@@ -19,7 +20,7 @@ import {Subscription} from "rxjs";
   styles: [
   ]
 })
-export class MissingAnimalListComponent implements OnDestroy{
+export class MissingAnimalListComponent implements OnDestroy {
   private animalService = inject(AnimalsService);
   private notification = inject(ToastrService);
   private subscription!: Subscription;
@@ -29,7 +30,7 @@ export class MissingAnimalListComponent implements OnDestroy{
     this.loadAnimals()
   }
 
-  loadAnimals(){
+  loadAnimals() {
     this.subscription = this.animalService.getMissingAnimals().subscribe((res) => {
       if (res.success) {
         this.animals = res.data;
@@ -37,16 +38,16 @@ export class MissingAnimalListComponent implements OnDestroy{
     })
   }
 
-  onDeleteFunc(animal: IAnimal){
+  onDeleteFunc(animal: IAnimal) {
     this.subscription = this.animalService.removeAnimal(animal._id).subscribe((res) => {
       if (res.success) {
         this.notification.success("Delete animal successfully.")
-        this.animals = this.animals.filter( i => i._id !== animal._id);
+        this.animals = this.animals.filter(i => i._id !== animal._id);
       }
     })
   }
-  onUpdateFunc(animal: IAnimal){
-    this.router.navigate(['','animals','update',animal._id]);
+  onUpdateFunc(animal: IAnimal) {
+    this.router.navigate(['', 'animals', 'update', animal._id]);
   }
   ngOnDestroy() {
     if (this.subscription) {

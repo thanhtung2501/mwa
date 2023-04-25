@@ -2,11 +2,29 @@ import Animal, { STATUS_REPORT } from "../models/animalModel.js";
 
 const AnimalService = {
     searchAnimal: async function (category, sex, animalStatus) {
-        return await Animal.find({
+        let filterAnimal = {
             category: category,
             sex: sex,
             status_animal: animalStatus
-        }).sort({ updatedAt: 1 });
+        };
+
+        if (!category && sex) {
+            filterAnimal = {
+                sex: sex,
+                status_animal: animalStatus
+            };
+        } else if (!sex && category) {
+            filterAnimal = {
+                category: category,
+                status_animal: animalStatus
+            };
+        } else if (!sex && !category) {
+            filterAnimal = {
+                status_animal: animalStatus
+            };
+        }
+
+        return await Animal.find(filterAnimal).sort({ updatedAt: 1 });
     },
 
     getAll: async function () {

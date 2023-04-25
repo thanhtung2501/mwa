@@ -1,8 +1,8 @@
-import {Component, inject, OnDestroy} from '@angular/core';
-import {AnimalsService} from "../animals.service";
-import {IAnimal} from "../IAnimal";
-import {ToastrService} from "ngx-toastr";
-import {Subscription} from "rxjs";
+import { Component, inject, OnDestroy } from '@angular/core';
+import { AnimalsService } from "../animals.service";
+import { IAnimal } from "../IAnimal";
+import { ToastrService } from "ngx-toastr";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-found-animal-list',
@@ -10,6 +10,7 @@ import {Subscription} from "rxjs";
     <app-animal-list
       [listName]="'Found animals'"
       [animals]="animals"
+      [statusAnimal]="'FOUND_ANIMAL'"
       [showAdoptButton]=false
       (onDelete)="onDeleteFunc($event)"
       (onUpdate)="onUpdateFunc($event)"
@@ -19,7 +20,7 @@ import {Subscription} from "rxjs";
   styles: [
   ]
 })
-export class FoundAnimalListComponent implements OnDestroy{
+export class FoundAnimalListComponent implements OnDestroy {
   private animalService = inject(AnimalsService);
   private notification = inject(ToastrService);
 
@@ -30,7 +31,7 @@ export class FoundAnimalListComponent implements OnDestroy{
     this.loadAnimals()
   }
 
-  loadAnimals(){
+  loadAnimals() {
     this.subscription = this.animalService.getFoundAnimals().subscribe((res) => {
       if (res.success) {
         this.animals = res.data;
@@ -38,15 +39,15 @@ export class FoundAnimalListComponent implements OnDestroy{
     })
   }
 
-  onDeleteFunc(animal: IAnimal){
+  onDeleteFunc(animal: IAnimal) {
     this.subscription = this.animalService.removeAnimal(animal._id).subscribe((res) => {
       if (res.success) {
         this.notification.success("Delete animal successfully.")
-        this.animals = this.animals.filter( i => i._id !== animal._id);
+        this.animals = this.animals.filter(i => i._id !== animal._id);
       }
     })
   }
-  onUpdateFunc(animal: IAnimal){
+  onUpdateFunc(animal: IAnimal) {
   }
 
   ngOnDestroy() {
