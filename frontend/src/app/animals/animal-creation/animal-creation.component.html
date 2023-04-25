@@ -18,8 +18,9 @@
 
         <div class="sm:col-span-6">
           <label for="loss_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-            <span *ngIf="animalCreationType == 'missing'">Missed date</span>
-            <span *ngIf="animalCreationType == 'found'">Found date</span>
+            <span *ngIf="animalCreationType == 'missing'">Missed Date</span>
+            <span *ngIf="animalCreationType == 'found'">Found Date</span>
+            <span *ngIf="animalCreationType == 'updateAnimal'">Missed/Found Date</span>
 
           </label>
           <input formControlName="loss_date" type="date" name="loss_date" id="loss_date"
@@ -62,14 +63,14 @@
         </div>
 
         <div>
-          <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet age</label>
+          <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet Age</label>
           <input formControlName="age" type="number" name="age" id="age"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             placeholder="1" required="">
         </div>
 
       </div>
-      <div class="grid gap-4 sm:gap-6" style="margin-top: 25px">
+      <div *ngIf="animalCreationType != 'updateAnimal'" class="grid gap-4 sm:gap-6" style="margin-top: 25px">
         <div class="w-full">
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="pet_image">Upload
             image</label>
@@ -77,9 +78,9 @@
             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
             aria-describedby="user_avatar_help" id="pet_image" type="file" name="image"
             (change)="getFileSelected($event)">
-          <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A profile picture is useful
-            to confirm your are logged into your account</div>
-          <button style="float: right" type="button" (click)="uploadImage()"
+          <div class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help">A picture is useful
+            to describe your pet</div>
+          <button *ngIf="isShowUploadBtn" style="float: right" type="button" (click)="uploadImage()"
             class=" float float-right text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Upload</button>
         </div>
       </div>
@@ -90,7 +91,10 @@
               Cancel
           </span>
         </button>
-        <button type="submit" [ngClass]="{'bg-gradient-to-br': animalCreationForm.valid, 'bg-gray-200': animalCreationForm.invalid}" class="text-white   from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Add record</button>
+        <button type="submit" [ngClass]="{'bg-gradient-to-br': animalCreationForm.valid, 'bg-gray-200': animalCreationForm.invalid}" class="text-white   from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+          <span *ngIf="animalCreationType != 'updateAnimal'; else saveButton">Add record</span>
+          <ng-template #saveButton>Save</ng-template>
+        </button>
       </div>
     </form>
   </div>

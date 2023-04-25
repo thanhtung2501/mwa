@@ -24,22 +24,25 @@ export class AnimalCreationComponent {
 
   private selectedFile!: File;
 
+  isShowUploadBtn = false;
+
   animalCreationForm = inject(NonNullableFormBuilder).group({
     category: ['Cat', Validators.required],
-    name: ['Theo', Validators.required],
-    loss_date:[new Date(), Validators.required],
-    found_date:[new Date()],
+    name: ['', Validators.required],
+    loss_date:[new Date().toISOString().substring(0, 10), Validators.required],
     sex: [''],
-    breed: ['Theo1'],
-    weight: ['1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['pink', Validators.required],
-    age: ['1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    breed: [''],
+    weight: ['1', [Validators.required, Validators.min(1), Validators.max(100)]],
+    color: ['', Validators.required],
+    age: ['1', [Validators.required, Validators.min(1), Validators.max(50)]],
   })
 
   onSubmit() {
+    const tempDate = this.animalCreationForm.value.loss_date == null ? new Date() : new Date(this.animalCreationForm.value.loss_date);
     let new_animal = {
       ...this.animalCreationForm.value,
-      found_date: this.animalCreationForm.value.loss_date,
+      loss_date: tempDate,
+      found_date: tempDate,
       user_id: "",
       image_name: this.animalImageName,
       image_url: this.animalImageURL
@@ -54,6 +57,7 @@ export class AnimalCreationComponent {
     if (inputElement && inputElement.files && inputElement.files.length) {
 
       this.selectedFile = inputElement.files[0];
+      this.isShowUploadBtn = true;
 
     }
 
@@ -74,6 +78,7 @@ export class AnimalCreationComponent {
         this.animalImageName = response.data.imageName;
 
         this.animalImageURL = response.data.imageUrl;
+        this.isShowUploadBtn = false;
 
       }
 

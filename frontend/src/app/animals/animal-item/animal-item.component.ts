@@ -16,9 +16,11 @@ export class AnimalItemComponent implements OnInit {
   @Output() onDelete = new EventEmitter();
   @Output() onUpdate = new EventEmitter();
   @Output() onAccept = new EventEmitter();
+  animalModalId: String = "";
 
   ngOnInit() {
-    this.imageSource = this.animal.image_url ? this.animal.image_url : 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png';
+    this.imageSource = this.animal.image_url ? this.animal.image_url : '../../assets/default-image.jpg';
+    this.animalModalId = "modal" + this.animal._id;
   }
 
   onDeleteFunc() {
@@ -26,9 +28,5 @@ export class AnimalItemComponent implements OnInit {
   }
   onUpdateFunc() {
     this.onUpdate.emit(this.animal);
-  }
-
-  onAcceptFunc(animal: IAnimal) {
-    this.onAccept.emit(animal);
   }
 }

@@ -8,46 +8,43 @@ import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-animal-edition',
-  templateUrl: 'animal-edition.component.html',
-  styles: [
-  ]
+  templateUrl: '../animal-creation/animal-creation.component.html',
+  styles: []
 })
-export class AnimalEditionComponent implements OnInit, OnDestroy{
+export class AnimalEditionComponent implements OnDestroy {
 
   private animalService = inject(AnimalsService);
   private activaterRouter = inject(ActivatedRoute);
   private notification = inject(ToastrService);
   private subscription!: Subscription;
   private animal_id: string = "";
+
+  animalCreationType: String = "updateAnimal"
+  isShowUploadBtn = false
   isMissingAnimal = false
 
-  animalEditionForm = inject(NonNullableFormBuilder).group({
+  animalCreationForm = inject(NonNullableFormBuilder).group({
     category: ['Dog', Validators.required],
-    name: ['Check 3', Validators.required],
-    loss_date:[new Date(), Validators.required],
-    found_date:[new Date()],
-    sex: ['Female'],
-    breed: ['Chuki'],
-    weight: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['Pink', Validators.required],
-    age: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    name: ['', Validators.required],
+    loss_date: [new Date().toISOString().substring(0, 10), Validators.required],
+    sex: [''],
+    breed: [''],
+    weight: ['1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
+    color: ['', Validators.required],
+    age: ['1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
   })
 
   constructor(private router: Router) {
     this.animal_id = this.activaterRouter.snapshot.paramMap.get('animal_id') as string;
-  }
-  ngOnInit() {
     this.isMissingAnimal = true;
-    this.subscription = this.animalService.getAnimalById(this.animal_id).subscribe( (res) => {
-      if (res.success == true){
+    this.subscription = this.animalService.getAnimalById(this.animal_id).subscribe((res) => {
+      if (res.success == true) {
         let animal = res.data;
-
-        let tempDate = animal.loss_date == null ? new Date() : animal.loss_date;
-        this.animalEditionForm.patchValue({
+        let tempDate = animal.loss_date == null ? new Date() : new Date(animal.loss_date);
+        this.animalCreationForm.patchValue({
           category: animal.category,
           name: animal.name,
-          loss_date: tempDate,
-          found_date: tempDate,
+          loss_date: tempDate.toISOString().substring(0, 10),
           sex: animal.sex,
           breed: animal.breed,
           weight: animal.weight.toString(),
@@ -57,13 +54,41 @@ export class AnimalEditionComponent implements OnInit, OnDestroy{
 
       }
     })
+
   }
 
+  // ngOnInit() {
+  //   this.isMissingAnimal = true;
+  //   this.subscription = this.animalService.getAnimalById(this.animal_id).subscribe((res) => {
+  //     if (res.success == true) {
+  //       let animal = res.data;
+  //
+  //       let tempDate = animal.loss_date == null ? new Date() : animal.loss_date;
+  //       this.animalCreationForm.patchValue({
+  //         category: animal.category,
+  //         name: animal.name,
+  //         loss_date: tempDate.toISOString().substring(0, 10),
+  //         sex: animal.sex,
+  //         breed: animal.breed,
+  //         weight: animal.weight.toString(),
+  //         color: animal.color,
+  //         age: animal.age.toString()
+  //       })
+  //
+  //     }
+  //   })
+  // }
 
-  onSubmit(){
-    this.subscription = this.animalService.updateAnimal(this.animal_id, this.animalEditionForm.value as unknown as IAnimal).subscribe(res => {
+  getFileSelected(event: Event) {
+  }
+
+  uploadImage() {
+  }
+
+  onSubmit() {
+    this.subscription = this.animalService.updateAnimal(this.animal_id, this.animalCreationForm.value as unknown as IAnimal).subscribe(res => {
       this.notification.success("Update animal successfully")
-      this.router.navigate(['','animals'])
+      this.router.navigate(['', 'animals'])
     })
   }
 

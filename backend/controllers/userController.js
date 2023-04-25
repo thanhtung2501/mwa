@@ -53,7 +53,21 @@ const UserController = {
             console.log(error)
             next(error);
         }
-    }
+    },
+
+    getById: async function (req, res, next) {
+        try {
+            const { user_id } = req.params;
+            const result = await User.findOne({_id: user_id});
+            res.json({
+                success: true,
+                data: result
+            })
+
+        } catch ( error) {
+            next(error);
+        }
+    },
 };
 
 export default UserController;

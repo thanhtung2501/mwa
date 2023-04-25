@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import {User} from "./userModel.js";
 
 export const STATUS_ANIMAL = {
     MISSING_ANIMAL: "MISSING_ANIMAL",
@@ -29,19 +30,7 @@ const Animals = mongoose.Schema(
         found_date: Date,
         adopt_date: Date,
         status_report: String,
-        adopted_user: {
-            name: String,
-            address: {
-                street: String,
-                city: String,
-                zipCode: String,
-                state: String,
-                location: [Number]
-            },
-            phoneNumber: String,
-            email: String,
-            password: String
-        },
+        adopted_user: User,
         image_name: String,
         image_url: String
     }, {

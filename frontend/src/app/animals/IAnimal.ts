@@ -1,3 +1,5 @@
+import {IUser} from "../models/user";
+
 export interface IAnimal {
   _id: string,
   user_id: string,
@@ -13,19 +15,7 @@ export interface IAnimal {
   found_date: Date,
   adopt_date: Date,
   status_report: string,
-  adopted_user: {
-    name: string,
-    address: {
-      street: string,
-      city: string,
-      zipCode: string,
-      state: string,
-      location: [number]
-    },
-    phoneNumber: string,
-    email: string,
-    password: string
-  },
+  adopted_user?: IUser,
   image_name: string,
   image_url: string
 }
