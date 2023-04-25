@@ -24,7 +24,6 @@ const AnimalController = {
                 newAnimalReport.status_report = STATUS_REPORT.ADOPT_REPORT;
                 newAnimalReport.status_animal = STATUS_ANIMAL.ADOPTED_ANIMAL;
                 newAnimalReport.user_id = tokenId;
-                console.log('newAdoptAnimal', newAnimalReport)
 
                 result = await AnimalService.create(newAnimalReport);
             } else if (action === ANIMAL_ACTION.ADD_FOUND_ANIMAL) {
