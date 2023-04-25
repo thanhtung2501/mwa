@@ -1,7 +1,8 @@
 import { Component, EventEmitter, inject, Input, Output, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from "@angular/forms";
 import { AnimalsService } from '../animals.service';
-import {IAnimal} from "../IAnimal";
+import { IAnimal } from "../IAnimal";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-creation',
@@ -9,11 +10,13 @@ import {IAnimal} from "../IAnimal";
   styles: [
   ]
 })
-export class AnimalCreationComponent implements OnInit{
+export class AnimalCreationComponent implements OnInit {
 
   @Input() animalCreationType: String = ""
   @Input() animalInitData = null
-  @Output() performSubmit =  new EventEmitter<any>();
+  @Output() performSubmit = new EventEmitter<any>();
+
+  private notification = inject(ToastrService);
 
   private animalService = inject(AnimalsService);
 
@@ -46,7 +49,7 @@ export class AnimalCreationComponent implements OnInit{
   }
 
   ngOnInit() {
-    if(this.animalInitData != null){
+    if (this.animalInitData != null) {
       this.animalCreationForm.value.age = "123"
       this.animalCreationForm.value.name = "909090 Thao"
     }
@@ -64,6 +67,7 @@ export class AnimalCreationComponent implements OnInit{
     imageFormData.append('image', this.selectedFile, this.selectedFile.name);
     this.animalService.uploadAnimalImage(imageFormData).subscribe(response => {
       if (response.success) {
+        this.notification.success('Upload image successfully.');
         this.animalImageName = response.data.imageName;
         this.animalImageURL = response.data.imageUrl;
       }
