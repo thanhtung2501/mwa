@@ -44,7 +44,7 @@ export class AnimalsService {
     return this.http.delete<{ success: boolean, data: any }>(environment.HTTP_SERVER + '/animals/' + animal_id)
   }
 
-  updateAnimal(animal_id: String , animal: IAnimal) {
+  updateAnimal(animal_id: String, animal: IAnimal) {
     return this.http.patch(environment.HTTP_SERVER + '/animals/' + animal_id, animal);
   }
 
@@ -52,9 +52,12 @@ export class AnimalsService {
     return this.http.post<{ success: boolean, data: any }>(environment.HTTP_SERVER + '/images', file);
   }
 
-  getAnimalById(animal_id: string){
-    return this.http.get<{success: true, data: IAnimal}>(environment.HTTP_SERVER + '/animals/' + animal_id);
+  getAnimalById(animal_id: string) {
+    return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/' + animal_id);
+  }
 
+  searchAnimal(category: string, sex: string) {
+    return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/filter?category=' + category + '&sex=' + sex);
   }
 }
 
