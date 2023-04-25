@@ -4,6 +4,7 @@ import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { StateService } from './services/state.service';
+import {MyGuardGuard} from "./services/my-guard.guard";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: "full" },
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: 'animals',
     loadChildren: () => import('./animals/animals.module').then(module => module.AnimalsModule),
-    canActivate: [() => inject(StateService).isLoggedIn()]
+    canActivate: [MyGuardGuard]
   },
   { path: '**', redirectTo: "home" },
 ];
