@@ -8,23 +8,29 @@ import {IAnimal} from "../IAnimal";
   styles: [
   ]
 })
-export class AnimalCreationComponent implements OnInit{
+export class AnimalCreationComponent implements OnInit {
 
   @Input() animalCreationType: String = ""
-  @Input() animalInitData = null
   @Output() performSubmit =  new EventEmitter<any>();
 
   animalCreationForm = inject(NonNullableFormBuilder).group({
-    category: ['Dog', Validators.required],
-    name: ['Check 3', Validators.required],
-    loss_date:["", Validators.required],
-    found_date:[],
+    category: ['', Validators.required],
+    name: ['', Validators.required],
+    loss_date:[new Date(), Validators.required],
+    found_date:[new Date()],
     sex: ['Female'],
-    breed: ['Chuki'],
-    weight: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['Pink', Validators.required],
-    age: ['0.1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    breed: [''],
+    weight: ['', [Validators.required, Validators.min(0.1), Validators.max(100)]],
+    color: ['', Validators.required],
+    age: ['', [Validators.required, Validators.min(0.1), Validators.max(50)]],
   })
+
+  ngOnInit() {
+    this.animalCreationForm.patchValue({
+      sex: 'Male',
+      category: 'Dog'
+    })
+  }
 
   onSubmit() {
     let new_animal = {
@@ -33,12 +39,5 @@ export class AnimalCreationComponent implements OnInit{
       user_id: ""
     }
     this.performSubmit.emit(new_animal);
-  }
-
-  ngOnInit() {
-    if(this.animalInitData != null){
-      this.animalCreationForm.value.age = "123"
-      this.animalCreationForm.value.name = "909090 Thao"
-    }
   }
 }

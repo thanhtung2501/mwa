@@ -1,5 +1,5 @@
 import AnimalService from "../services/animalService.js";
-import animalModel, { STATUS_ANIMAL, STATUS_REPORT } from "../models/animalModel.js";
+import { STATUS_ANIMAL, STATUS_REPORT } from "../models/animalModel.js";
 
 const ANIMAL_ACTION = {
     LIST_MISSING_ANIMALS: "listMissingAnimals",

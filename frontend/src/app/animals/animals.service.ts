@@ -44,10 +44,14 @@ export class AnimalsService {
     return this.http.delete<{ success: boolean, data: any }>(environment.HTTP_SERVER + '/animals/' + animal_id)
   }
 
-  updateAnimal(animal: IAnimal) {
-    return this.http.patch(environment.HTTP_SERVER + '/animals/' + animal._id, animal);
+  updateAnimal(animal_id: String , animal: IAnimal) {
+    return this.http.patch(environment.HTTP_SERVER + '/animals/' + animal_id, animal);
   }
-}
+
+  getAnimalById(animal_id: string){
+    return this.http.get<{success: true, data: IAnimal}>(environment.HTTP_SERVER + '/animals/' + animal_id);
+
+  }}
 
 
 
