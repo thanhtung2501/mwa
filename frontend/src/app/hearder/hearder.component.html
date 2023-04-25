@@ -1,27 +1,54 @@
-<div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-  <div class="flex-row items-center justify-between p-4 pt-0 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+<nav
+  class="bg-white border-gray-200 dark:bg-gray-900 relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
+  <div class="flex flex-wrap items-center justify-between max-w-screen-xl mx-auto p-4">
     <a [routerLink]="['','home']" class="h-70">
-        <img class="w-20 h-20 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/006/470/732/small/animal-pet-logo-template-vector.jpg" alt="Rounded avatar">
-        <div class="site-name">
+      <img class="w-20 h-20 rounded-full"
+        src="https://static.vecteezy.com/system/resources/thumbnails/006/470/732/small/animal-pet-logo-template-vector.jpg"
+        alt="Rounded avatar">
+      <div class="site-name">
         <h5 class="mr-3 font-semibold dark:text-white">Pet Rescue</h5>
         <p class="text-gray-500 dark:text-gray-400">Rescue poor pets which are abandoned</p>
-        </div>
+      </div>
     </a>
 
-    <button type="button" (click)="clickLogout()" *ngIf="state._id; else login"
-            class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
-      Logout
-    </button>
+    <div class="flex items-center md:order-2">
+      <div class="menu-bar" *ngIf="state._id">
+        <a [routerLink]="['', 'animals', 'missing-animal-list']"
+          class="menu-bar item focus-btn flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+          Missing Animals
+        </a>
+        <a [routerLink]="['', 'animals', 'found-animal-list']"
+          class="menu-bar item focus-btn flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+          Found Animals
+        </a>
+        <a [routerLink]="['', 'animals']"
+          class="menu-bar item focus-btn flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+          Adopt Animals
+        </a>
+      </div>
 
-    <ng-template #login>
-      <button type="button" (click)="clickLogin()"
-              class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700 pr-100">
-        Login
-      </button>
-      <button type="button" (click)="clickSignup()"
-              class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
-        Sign up
-      </button>
-    </ng-template>
+      <div
+        class="text-gray-800 dark:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">
+        <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 md:mt-0">
+          <li>
+            <button
+              class="flex items-center justify-between w-full py-2 pl-3 pr-4 font-medium text-gray-900 border-b border-gray-100 md:w-auto hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
+              Welcome {{loginUserName}}
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <a (click)="clickLogout()" *ngIf="state._id; else login"
+        class="focus-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Logout</a>
+
+      <ng-template #login>
+        <a (click)="clickLogin()"
+          class="focus-btn text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Login</a>
+        <a (click)="clickSignup()"
+          class="focus-btn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign
+          up</a>
+      </ng-template>
+    </div>
   </div>
-</div>
+</nav>
