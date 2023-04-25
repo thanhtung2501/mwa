@@ -21,7 +21,7 @@ export class SignupComponent implements OnDestroy {
   signupForm = inject(FormBuilder).nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     name: ['', Validators.required],
-    phoneNumber: [''],
+    phoneNumber: ['',Validators.pattern(/^\+?\d{10,14}$/)],
     password: ['', Validators.required],
   });
 

@@ -29,9 +29,9 @@ export class AnimalEditionComponent implements OnDestroy {
     loss_date: [new Date().toISOString().substring(0, 10), Validators.required],
     sex: [''],
     breed: [''],
-    weight: ['1', [Validators.required, Validators.min(0.1), Validators.max(100)]],
-    color: ['', Validators.required],
-    age: ['1', [Validators.required, Validators.min(0.1), Validators.max(50)]],
+    weight: ['1', [Validators.min(0.1), Validators.max(100)]],
+    color: [''],
+    age: ['1', [Validators.min(0.1), Validators.max(50)]],
   })
 
   constructor(private router: Router) {
@@ -57,28 +57,6 @@ export class AnimalEditionComponent implements OnDestroy {
 
   }
 
-  // ngOnInit() {
-  //   this.isMissingAnimal = true;
-  //   this.subscription = this.animalService.getAnimalById(this.animal_id).subscribe((res) => {
-  //     if (res.success == true) {
-  //       let animal = res.data;
-  //
-  //       let tempDate = animal.loss_date == null ? new Date() : animal.loss_date;
-  //       this.animalCreationForm.patchValue({
-  //         category: animal.category,
-  //         name: animal.name,
-  //         loss_date: tempDate.toISOString().substring(0, 10),
-  //         sex: animal.sex,
-  //         breed: animal.breed,
-  //         weight: animal.weight.toString(),
-  //         color: animal.color,
-  //         age: animal.age.toString()
-  //       })
-  //
-  //     }
-  //   })
-  // }
-
   getFileSelected(event: Event) {
   }
 
@@ -86,7 +64,15 @@ export class AnimalEditionComponent implements OnDestroy {
   }
 
   onSubmit() {
-    this.subscription = this.animalService.updateAnimal(this.animal_id, this.animalCreationForm.value as unknown as IAnimal).subscribe(res => {
+    const tempDate = this.animalCreationForm.value.loss_date == null ? new Date() : new Date(this.animalCreationForm.value.loss_date);
+
+    let new_animal = {
+      ...this.animalCreationForm.value,
+      loss_date: tempDate,
+      found_date: tempDate
+    }
+    console.log(new_animal)
+    this.subscription = this.animalService.updateAnimal(this.animal_id, new_animal as unknown as IAnimal).subscribe(res => {
       this.notification.success("Update animal successfully")
       this.router.navigate(['', 'animals'])
     })
