@@ -46,4 +46,38 @@ export class AnimalCreationComponent {
     };
     this.performSubmit.emit(new_animal);
   }
+
+  getFileSelected(event: Event) {
+
+    const inputElement = event.target as HTMLInputElement;
+
+    if (inputElement && inputElement.files && inputElement.files.length) {
+
+      this.selectedFile = inputElement.files[0];
+
+    }
+
+  }
+
+  uploadImage() {
+
+    const imageFormData = new FormData();
+
+    imageFormData.append('image', this.selectedFile, this.selectedFile.name);
+
+    this.animalService.uploadAnimalImage(imageFormData).subscribe(response => {
+
+      if (response.success) {
+
+        this.notification.success('Upload image successfully.');
+
+        this.animalImageName = response.data.imageName;
+
+        this.animalImageURL = response.data.imageUrl;
+
+      }
+
+    });
+
+  }
 }
