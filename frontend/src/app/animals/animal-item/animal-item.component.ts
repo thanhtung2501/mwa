@@ -16,11 +16,9 @@ export class AnimalItemComponent implements OnInit {
   @Output() onDelete = new EventEmitter();
   @Output() onUpdate = new EventEmitter();
   @Output() onAccept = new EventEmitter();
-  animalModalId: String = "";
 
   ngOnInit() {
     this.imageSource = this.animal.image_url ? this.animal.image_url : '../../assets/default-image.jpg';
-    this.animalModalId = "modal" + this.animal._id;
   }
 
   onDeleteFunc() {

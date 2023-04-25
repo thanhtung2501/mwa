@@ -15,7 +15,6 @@
 
     <app-adopt-animal-modal
       *ngIf="showAdoptButton"
-      [modalId]="animalModalId"
       [animal]="animal"
     ></app-adopt-animal-modal>
     <button (click)="onDeleteFunc()" *ngIf="isEditable" type="button"
