@@ -8,7 +8,7 @@ const upload = multer({
 
 const router = Router();
 
-router.get("/filter", AnimalController.searchAnimal);
+router.post("/filter", AnimalController.searchAnimal);
 router.get("", AnimalController.performAnimalsByStatus);
 router.post("", AnimalController.performAnimalsByStatus);
 router.get("/:animal_id", AnimalController.getAnimalByID);

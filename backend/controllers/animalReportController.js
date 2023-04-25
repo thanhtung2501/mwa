@@ -97,8 +97,8 @@ const AnimalController = {
 
     searchAnimal: async function (req, res, next) {
         try {
-            const { category, sex } = req.query;
-            const result = await AnimalService.searchAnimal(category, sex);
+            const { category, sex, status_animal } = req.body;
+            const result = await AnimalService.searchAnimal(category, sex, status_animal);
             res.json({ success: true, data: result });
         } catch (error) {
             next(error);

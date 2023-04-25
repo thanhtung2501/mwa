@@ -1,10 +1,11 @@
 import Animal from "../models/animalModel.js";
 
 const AnimalService = {
-    searchAnimal: async function (category, sex) {
+    searchAnimal: async function (category, sex, animalStatus) {
         return await Animal.find({
             category: category,
-            sex: sex
+            sex: sex,
+            status_animal: animalStatus
         }).sort({ updatedAt: 1 });
     },
 

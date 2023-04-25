@@ -56,8 +56,8 @@ export class AnimalsService {
     return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/' + animal_id);
   }
 
-  searchAnimal(category: string, sex: string) {
-    return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/filter?category=' + category + '&sex=' + sex);
+  searchAnimal(animal: IAnimal) {
+    return this.http.post<{ success: true, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals/filter', animal);
   }
 }
 
