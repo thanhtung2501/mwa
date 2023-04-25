@@ -9,7 +9,9 @@
     <form [formGroup]="animalCreationForm" (ngSubmit)="onSubmit()">
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div>
-          <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+          <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Category<small style="color: red"> *</small>
+          </label>
           <select formControlName="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
             <option value="Cat">Cat</option>
             <option value="Dog">Dog</option>
@@ -21,17 +23,26 @@
             <span *ngIf="animalCreationType == 'missing'">Missed Date</span>
             <span *ngIf="animalCreationType == 'found'">Found Date</span>
             <span *ngIf="animalCreationType == 'updateAnimal'">Missed/Found Date</span>
-
+            <small style="color: red"> *</small>
           </label>
           <input formControlName="loss_date" type="date" name="loss_date" id="loss_date"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('loss_date')?.errors?.['required']&&animalCreationForm.get('loss_date')?.touched">Date is required</small>
         </div>
 
         <div class="sm:col-span-6">
-          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet Name</label>
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Pet Name
+            <small style="color: red"> *</small>
+          </label>
           <input formControlName="name" type="text" name="name" id="name"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Type pet name" required="">
+            placeholder="Type pet name">
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('name')?.errors?.['required']&&animalCreationForm.get('name')?.touched">Name is required</small>
         </div>
         <div>
           <label for="sex" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sex</label>
@@ -45,7 +56,7 @@
           <label for="breed" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet Breed</label>
           <input formControlName="breed" type="text" name="breed" id="breed"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Type pet breed" required="">
+            placeholder="Type pet breed">
         </div>
 
         <div>
@@ -53,20 +64,32 @@
             (kg)</label>
           <input formControlName="weight" type="number" name="weight" id="weight"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="1" required="">
+            placeholder="1">
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('weight')?.errors?.['min']&&animalCreationForm.get('weight')?.touched">Min weight is 1</small>
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('weight')?.errors?.['max']&&animalCreationForm.get('weight')?.touched">Min weight is 100</small>
         </div>
         <div class="w-full">
           <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet Color</label>
           <input formControlName="color" type="text" name="color" id="color"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Type pet color" required="">
+            placeholder="Type pet color">
         </div>
 
         <div>
           <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pet Age</label>
           <input formControlName="age" type="number" name="age" id="age"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="1" required="">
+            placeholder="1">
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('age')?.errors?.['min']&&animalCreationForm.get('age')?.touched">Min age is 1</small>
+          <small
+            style="color: red"
+            *ngIf="animalCreationForm.get('age')?.errors?.['max']&&animalCreationForm.get('age')?.touched">Min age is 50</small>
         </div>
 
       </div>

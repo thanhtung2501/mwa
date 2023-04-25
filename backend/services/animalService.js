@@ -95,7 +95,7 @@ const AnimalService = {
         return await Animal.findOne({ _id: animalId, user_id: tokenId });
     },
 
-    update: async function (tokenId, animal_id, name, breed, sex, age, color, weight) {
+    update: async function (tokenId, animal_id, name, breed, sex, age, color, weight, loss_date, found_date) {
         const result = await Animal.updateOne(
             { _id: animal_id, user_id: tokenId },
             {
@@ -105,7 +105,9 @@ const AnimalService = {
                     sex: sex,
                     age: age,
                     color: color,
-                    weight: weight
+                    weight: weight,
+                    loss_date: loss_date,
+                    found_date: found_date
                 }
             }
         );

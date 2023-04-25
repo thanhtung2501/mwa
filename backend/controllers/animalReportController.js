@@ -74,8 +74,8 @@ const AnimalController = {
         try {
             const tokenId = req.token._id;
             const { animal_id } = req.params;
-            const { name, breed, sex, age, color, weight } = req.body;
-            const result = await AnimalService.update(tokenId, animal_id, name, breed, sex, age, color, weight);
+            const { name, breed, sex, age, color, weight, loss_date, found_date } = req.body;
+            const result = await AnimalService.update(tokenId, animal_id, name, breed, sex, age, color, weight, loss_date, found_date);
             res.json({
                 success: true,
                 data: result

@@ -8,7 +8,7 @@ export interface IAnimal {
   breed: string,
   sex: string,
   age: number,
-  color: string,
+  color?: string,
   weight: number,
   status_animal: string,
   loss_date: Date,

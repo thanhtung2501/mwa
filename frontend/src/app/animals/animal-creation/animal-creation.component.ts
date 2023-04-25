@@ -32,9 +32,9 @@ export class AnimalCreationComponent {
     loss_date:[new Date().toISOString().substring(0, 10), Validators.required],
     sex: [''],
     breed: [''],
-    weight: ['1', [Validators.required, Validators.min(1), Validators.max(100)]],
-    color: ['', Validators.required],
-    age: ['1', [Validators.required, Validators.min(1), Validators.max(50)]],
+    weight: ['1', [Validators.min(1), Validators.max(100)]],
+    color: [''],
+    age: ['1', [Validators.min(1), Validators.max(50)]],
   })
 
   onSubmit() {
