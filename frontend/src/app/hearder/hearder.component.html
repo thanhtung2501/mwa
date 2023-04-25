@@ -1,15 +1,12 @@
 <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
-  <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
-    <a [routerLink]="['','home']">
-      <div>
+  <div class="flex-row items-center justify-between p-4 pt-0 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
+    <a [routerLink]="['','home']" class="h-70">
+        <img class="w-20 h-20 rounded-full" src="https://static.vecteezy.com/system/resources/thumbnails/006/470/732/small/animal-pet-logo-template-vector.jpg" alt="Rounded avatar">
+        <div class="site-name">
         <h5 class="mr-3 font-semibold dark:text-white">Pet Rescue</h5>
         <p class="text-gray-500 dark:text-gray-400">Rescue poor pets which are abandoned</p>
-      </div>
+        </div>
     </a>
-    <button type="button" (click)="clickHome()"
-            class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
-      Home
-    </button>
 
     <button type="button" (click)="clickLogout()" *ngIf="state._id; else login"
             class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
@@ -18,7 +15,7 @@
 
     <ng-template #login>
       <button type="button" (click)="clickLogin()"
-              class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700">
+              class="flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg bg-primary-700 pr-100">
         Login
       </button>
       <button type="button" (click)="clickSignup()"

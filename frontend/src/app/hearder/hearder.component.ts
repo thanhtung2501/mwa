@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import { Router } from "@angular/router";
 import { StateService, init_state } from '../services/state.service';
 import { Subscription } from 'rxjs';
@@ -7,10 +7,26 @@ import { IState } from '../models/state';
 @Component({
   selector: 'app-hearder',
   templateUrl: 'hearder.component.html',
-  styles: [
+  styles: [`
+  .site-name{
+    position: relative;
+    left:80px;
+    bottom: 55px;
+  }
+  .pt-0 {
+    padding-top: 0 !important;
+  }
+  .h-70 {
+    height: 70px;
+  }
+  .pr-100{
+    position: absolute;
+    right: 120px;
+  }
+  `
   ]
 })
-export class HearderComponent {
+export class HearderComponent implements OnDestroy{
   state!: IState;
 
   private stateService = inject(StateService);
@@ -41,6 +57,8 @@ export class HearderComponent {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
