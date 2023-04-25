@@ -7,7 +7,7 @@ import {Subscription} from "rxjs";
   selector: 'app-available-animal-list',
   template: `
     <app-animal-list [listName]="'Adopt animals'"
-                     [listDescription]="'Rescue the poor animals'"
+                     [listDescription]="'Rescue the poor animals Rescue the poor animals Rescue the poor animals Rescue the poor animals Rescue the poor animalsRescue the poor animals Rescue the poor animals Rescue the poor animals Rescue the poor animals Rescue the poor animals Rescue the poor animals'"
                      [animals]="animals"
                      [showAdoptButton]=true
                      [isEditable]=false
