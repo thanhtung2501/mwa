@@ -1,10 +1,10 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {NonNullableFormBuilder, Validators} from "@angular/forms";
-import {IAnimal} from "../IAnimal";
-import {AnimalsService} from "../animals.service";
-import {Subscription} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { NonNullableFormBuilder, Validators } from "@angular/forms";
+import { IAnimal } from "../IAnimal";
+import { AnimalsService } from "../animals.service";
+import { Subscription } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-animal-edition',
@@ -21,7 +21,6 @@ export class AnimalEditionComponent implements OnDestroy {
 
   animalCreationType: String = "updateAnimal"
   isShowUploadBtn = false
-  isMissingAnimal = false
 
   animalCreationForm = inject(NonNullableFormBuilder).group({
     category: ['Dog', Validators.required],
@@ -36,7 +35,6 @@ export class AnimalEditionComponent implements OnDestroy {
 
   constructor(private router: Router) {
     this.animal_id = this.activaterRouter.snapshot.paramMap.get('animal_id') as string;
-    this.isMissingAnimal = true;
     this.subscription = this.animalService.getAnimalById(this.animal_id).subscribe((res) => {
       if (res.success == true) {
         let animal = res.data;
@@ -86,9 +84,22 @@ export class AnimalEditionComponent implements OnDestroy {
   }
 
   onSubmit() {
+    let animalStatus = '';
+    this.animalService.getAnimalById(this.animal_id).subscribe(res => {
+      if (res.success) {
+        animalStatus = res.data.status_animal;
+      }
+    })
+
     this.subscription = this.animalService.updateAnimal(this.animal_id, this.animalCreationForm.value as unknown as IAnimal).subscribe(res => {
       this.notification.success("Update animal successfully")
-      this.router.navigate(['', 'animals'])
+      if (animalStatus === 'MISSING_ANIMAL') {
+        this.router.navigate(['', 'animals', 'missing-animal-list']);
+      } else if (animalStatus === 'FOUND_ANIMAL') {
+        this.router.navigate(['', 'animals', 'found-animal-list']);
+      } else {
+        this.router.navigate(['', 'animals']);
+      }
     })
   }
 
