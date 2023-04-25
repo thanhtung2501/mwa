@@ -94,6 +94,16 @@ const AnimalController = {
             next(e);
         }
     },
+
+    searchAnimal: async function (req, res, next) {
+        try {
+            const { category, sex } = req.query;
+            const result = await AnimalService.searchAnimal(category, sex);
+            res.json({ success: true, data: result });
+        } catch (error) {
+            next(error);
+        }
+    }
 };
 
 export default AnimalController;

@@ -1,6 +1,13 @@
 import Animal from "../models/animalModel.js";
 
 const AnimalService = {
+    searchAnimal: async function (category, sex) {
+        return await Animal.find({
+            category: category,
+            sex: sex
+        }).sort({ updatedAt: 1 });
+    },
+
     getAll: async function () {
         return await Animal.find({});
     },
@@ -44,8 +51,6 @@ const AnimalService = {
     },
 
     getById: async function (animalId, tokenId) {
-        // console.log(animalId)
-        // console.log(tokenId)
         return await Animal.findOne({ _id: animalId, user_id: tokenId });
     },
 
