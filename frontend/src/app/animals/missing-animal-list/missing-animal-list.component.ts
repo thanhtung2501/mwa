@@ -49,6 +49,8 @@ export class MissingAnimalListComponent implements OnDestroy{
     this.router.navigate(['','animals','update',animal._id]);
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

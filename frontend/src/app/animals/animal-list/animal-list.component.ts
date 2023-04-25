@@ -37,14 +37,6 @@ export class AnimalListComponent {
     this.onAccept.emit(animal);
   }
 
-  searchByCategory(){
-    this.searchCondition = "category";
-  }
-
-  searchBySex(){
-    this.searchCondition = "sex";
-  }
-
   searchFrom = inject(NonNullableFormBuilder).group({
     category: [''],
     sex:['']

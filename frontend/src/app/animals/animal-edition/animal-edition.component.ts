@@ -59,14 +59,18 @@ export class AnimalEditionComponent implements OnInit, OnDestroy{
     })
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
 
   onSubmit(){
     this.subscription = this.animalService.updateAnimal(this.animal_id, this.animalEditionForm.value as unknown as IAnimal).subscribe(res => {
       this.notification.success("Update animal successfully")
       this.router.navigate(['','animals'])
     })
+  }
+
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
