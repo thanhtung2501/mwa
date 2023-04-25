@@ -11,12 +11,10 @@ export class AnimalsService {
   private http = inject(HttpClient);
 
   getAllAnimals() {
-    console.log("call getAllAnimals")
     return this.http.get<{ success: boolean, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals');
   }
 
   getMissingAnimals() {
-    console.log("call getMissingAnimals")
     return this.http.get<{ success: boolean, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals?action=listMissingAnimals');
   }
 
@@ -56,8 +54,8 @@ export class AnimalsService {
     return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/' + animal_id);
   }
 
-  searchAnimal(category: string, sex: string) {
-    return this.http.get<{ success: true, data: IAnimal }>(environment.HTTP_SERVER + '/animals/filter?category=' + category + '&sex=' + sex);
+  searchAnimal(animal: IAnimal) {
+    return this.http.post<{ success: true, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals/filter', animal);
   }
 }
 
