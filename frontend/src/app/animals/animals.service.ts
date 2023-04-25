@@ -11,12 +11,10 @@ export class AnimalsService {
   private http = inject(HttpClient);
 
   getAllAnimals() {
-    console.log("call getAllAnimals")
     return this.http.get<{ success: boolean, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals');
   }
 
   getMissingAnimals() {
-    console.log("call getMissingAnimals")
     return this.http.get<{ success: boolean, data: IAnimal[] }>(environment.HTTP_SERVER + '/animals?action=listMissingAnimals');
   }
 

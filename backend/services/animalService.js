@@ -1,4 +1,4 @@
-import Animal from "../models/animalModel.js";
+import Animal, { STATUS_REPORT } from "../models/animalModel.js";
 
 const AnimalService = {
     searchAnimal: async function (category, sex, animalStatus) {
@@ -45,10 +45,32 @@ const AnimalService = {
     },
 
     getAnimalByReportStatus: async function (status, tokenId) {
-        return await Animal.find({
+        let filterObj = {
             status_report: status,
             user_id: tokenId
-        }).sort({ updatedAt: 1 });
+        };
+
+        if (STATUS_REPORT.ADOPT_REPORT === status) {
+            const currentDate = new Date();  // current date and time
+            const passDate = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));  // 7 days ago
+
+            filterObj = {
+                $and: [
+                    {
+                        $or: [
+                            { loss_date: { $lte: passDate } },
+                            { found_date: { $lte: passDate } }
+                        ]
+                    },
+                    {
+                        status_animal: { $ne: status },
+                        user_id: tokenId
+                    }
+                ]
+            };
+        }
+
+        return await Animal.find(filterObj).sort({ updatedAt: 1 });
     },
 
     getById: async function (animalId, tokenId) {
