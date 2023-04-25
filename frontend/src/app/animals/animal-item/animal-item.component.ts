@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {IAnimal} from "../IAnimal";
 
 @Component({
   selector: 'app-animal-item',

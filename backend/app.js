@@ -12,7 +12,7 @@ import path from 'path';
 // init
 const app = express();
 
-await mongoose.connect(`mongodb://localhost:27017/mwa1`)
+await mongoose.connect(`mongodb://localhost:27017/mwa`)
 // await mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.pws1p.mongodb.net/mwa`);
 console.log('DB Connected successfully!!!!');
 
