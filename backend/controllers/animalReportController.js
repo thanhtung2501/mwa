@@ -4,7 +4,7 @@ import { STATUS_ANIMAL, STATUS_REPORT } from "../models/animalModel.js";
 const ANIMAL_ACTION = {
     LIST_MISSING_ANIMALS: "listMissingAnimals",
     ADD_MISSING_ANIMAL: "addMissingAnimal",
-    LIST_FOUND_ANIMALS: "listFoundAnimalS",
+    LIST_FOUND_ANIMALS: "listFoundAnimals",
     ADD_FOUND_ANIMAL: "addFoundAnimal",
     LIST_ADOPT_ANIMALS: "listAdoptAnimals",
     ADD_ADOPT_ANIMAL: "addAdoptAnimal"
@@ -43,6 +43,7 @@ const AnimalController = {
 
                 result = await AnimalService.create(newAnimalReport);
             } else if (action === ANIMAL_ACTION.LIST_ADOPT_ANIMALS) {
+                // get available animals after 7 days missing/found
                 result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.ADOPT_REPORT, tokenId);
             } else if (action === ANIMAL_ACTION.LIST_FOUND_ANIMALS) {
                 result = await AnimalService.getAnimalByReportStatus(STATUS_REPORT.FOUND_REPORT, tokenId);
