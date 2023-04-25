@@ -1,9 +1,38 @@
 <section class="bg-white dark:bg-gray-900">
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
-    <div class="mx-auto max-w-screen-sm text-center mb-8 lg:mb-16">
+    <div class="mx-auto max-w-screen-sm text-center">
       <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{{listName}}</h2>
-      <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">{{listDescription}}</p>
+      <p class="font-light text-gray-500 lg:mb-8 sm:text-xl dark:text-gray-400">{{listDescription}}</p>
     </div>
+
+    <section class="bg-white dark:bg-gray-900">
+      <div class="py-8 px-4 mx-auto w-full lg:py-8">
+        <form [formGroup]="searchFrom" (ngSubmit)="onSearch()">
+          <div class="grid gap-4 search sm:grid-cols-3 sm:gap-6">
+            <div>
+              <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+              <select formControlName="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option value="">Select category</option>
+                <option value="Cat">Cat</option>
+                <option value="Dog">Dog</option>
+              </select>
+            </div>
+            <div>
+              <label for="sex" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sex</label>
+              <select formControlName="sex" id="sex" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <option value="">Select sex</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div class="flex mt-4 space-x-3 md:mt-6">
+              <button type="submit" class="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <div class="grid gap-8 mb-6 lg:mb-16 md:grid-cols-2">
       <div *ngFor="let animal of animals"  >
         <app-animal-item
