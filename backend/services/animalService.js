@@ -24,7 +24,77 @@ const AnimalService = {
             };
         }
 
-        return await Animal.find(filterAnimal).sort({ updatedAt: 1 });
+        let filterObj = filterAnimal;
+
+        if (!animalStatus) {
+            animalStatus = 'ADOPTED_ANIMAL';
+            const currentDate = new Date();  // current date and time
+            const passDate = new Date(currentDate.getTime() - (7 * 24 * 60 * 60 * 1000));  // 7 days ago
+
+            if (!category && sex) {
+                filterObj = {
+                    $and: [
+                        {
+                            $or: [
+                                { loss_date: { $lte: passDate } },
+                                { found_date: { $lte: passDate } }
+                            ]
+                        },
+                        {
+                            status_animal: { $ne: animalStatus },
+                            sex: sex,
+                        }
+                    ]
+                };
+            } else if (!sex && category) {
+                filterObj = {
+                    $and: [
+                        {
+                            $or: [
+                                { loss_date: { $lte: passDate } },
+                                { found_date: { $lte: passDate } }
+                            ]
+                        },
+                        {
+                            status_animal: { $ne: animalStatus },
+                            category: category
+                        }
+                    ]
+                };
+            } else if (sex && category) {
+                filterObj = {
+                    $and: [
+                        {
+                            $or: [
+                                { loss_date: { $lte: passDate } },
+                                { found_date: { $lte: passDate } }
+                            ]
+                        },
+                        {
+                            status_animal: { $ne: animalStatus },
+                            category: category,
+                            sex: sex
+                        }
+                    ]
+                };
+            } else if (!sex && !category) {
+                filterObj = {
+                    $and: [
+                        {
+                            $or: [
+                                { loss_date: { $lte: passDate } },
+                                { found_date: { $lte: passDate } }
+                            ]
+                        },
+                        {
+                            status_animal: { $ne: animalStatus }
+                        }
+                    ]
+                };
+            }
+        }
+
+        return await Animal.find(filterObj).sort({ updatedAt: 1 });
     },
 
     getAll: async function () {
