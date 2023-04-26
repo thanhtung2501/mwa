@@ -3,6 +3,7 @@ import { AnimalsService } from "../animals.service";
 import { IAnimal } from "../IAnimal";
 import { ToastrService } from "ngx-toastr";
 import { Subscription } from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-found-animal-list',
@@ -27,7 +28,7 @@ export class FoundAnimalListComponent implements OnDestroy {
   private subscription!: Subscription;
   animals!: IAnimal[];
 
-  constructor() {
+  constructor(private router: Router) {
     this.loadAnimals()
   }
 
@@ -48,6 +49,7 @@ export class FoundAnimalListComponent implements OnDestroy {
     })
   }
   onUpdateFunc(animal: IAnimal) {
+    this.router.navigate(['', 'animals', 'update', animal._id]);
   }
 
   ngOnDestroy() {
