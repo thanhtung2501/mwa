@@ -28,6 +28,9 @@ export class AnimalItemComponent implements OnInit {
     this.modalId =`modal${this.animal._id}`;
     this.closeModalBtnId = `closeModal${this.animal._id}`;
     this.declineModalBtnId = `declineModal${this.animal._id}`;
+    if(this.animal.status_animal === "ADOPTED_ANIMAL") {
+      this.showAdoptButton = false;
+    }
   }
 
   onDeleteFunc() {
