@@ -48,6 +48,7 @@ export class AdoptAnimalModalComponent implements OnDestroy, AfterViewInit{
   @Input() modalId: string = ""
   @Input() declineModalBtnId: string = ""
   @Input() closeModalBtnId: string = ""
+  disableAdoptBtn = false
 
 
   onAcceptFunc(){
@@ -87,6 +88,8 @@ export class AdoptAnimalModalComponent implements OnDestroy, AfterViewInit{
     this.buttonOpenModal.addEventListener('click', () => this.modal!.show());
     this.buttonCloseModal.addEventListener('click', () => this.modal!.hide());
     this.buttonDeclineModal.addEventListener('click', () => this.modal!.hide());
+
+    this.disableAdoptBtn = this.animal.status_animal === "ADOPTED_ANIMAL";
   }
 
   ngOnDestroy() {
