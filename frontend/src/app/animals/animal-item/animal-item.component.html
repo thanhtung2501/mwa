@@ -13,7 +13,7 @@
     <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Color: {{animal.color}}</p>
     <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">Weight: {{animal.weight}}</p>
 
-    <div *ngIf="showAdoptButton">
+    <div *ngIf="showAdoptButton" style="width: 150px">
     <app-adopt-animal-modal
       [animal]="animal"
       [modalId]="modalId"
