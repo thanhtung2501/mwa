@@ -1,4 +1,14 @@
-import {Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {IAnimal} from "../IAnimal";
 import {NonNullableFormBuilder, Validators} from "@angular/forms";
 import {AnimalsService} from "../animals.service";
@@ -17,7 +27,7 @@ import {Subscription} from "rxjs";
     }
   `]
 })
-export class AdoptAnimalModalComponent implements OnInit, OnDestroy{
+export class AdoptAnimalModalComponent implements OnDestroy, AfterViewInit{
 
   private animalService = inject(AnimalsService)
   private userService = inject(UserService)
@@ -26,7 +36,6 @@ export class AdoptAnimalModalComponent implements OnInit, OnDestroy{
 
   private subscription!: Subscription
 
-  @Input() modalId: String = ""
   @Input() animal!: IAnimal
   private buttonOpenModal?: HTMLElement
   private buttonCloseModal?: HTMLElement
@@ -34,6 +43,12 @@ export class AdoptAnimalModalComponent implements OnInit, OnDestroy{
   private modalElement?: HTMLElement
 
   private modal?: Modal
+
+  @Input() openModalBtnId: string = ""
+  @Input() modalId: string = ""
+  @Input() declineModalBtnId: string = ""
+  @Input() closeModalBtnId: string = ""
+
 
   onAcceptFunc(){
     const currentUser = JSON.parse(localStorage.getItem('APP_STATE') || '');
@@ -58,11 +73,15 @@ export class AdoptAnimalModalComponent implements OnInit, OnDestroy{
     adopt_date: [new Date().toISOString().substring(0, 10), Validators.required],
   })
 
-  ngOnInit() {
-    this.buttonOpenModal = document.querySelector('#openModalBtnId')!;
-    this.buttonCloseModal = document.querySelector('#closeModalBtnId')!;
-    this.buttonDeclineModal = document.querySelector('#declineModalBtnId')!;
-    this.modalElement = document.querySelector('#animalModalId')!;
+  constructor() {
+
+  }
+
+  ngAfterViewInit() {
+    this.buttonOpenModal = document.querySelector(`#${this.openModalBtnId}`)!;
+    this.buttonCloseModal = document.querySelector(`#${this.closeModalBtnId}`)!;
+    this.buttonDeclineModal = document.querySelector(`#${this.declineModalBtnId}`)!;
+    this.modalElement = document.querySelector(`#${this.modalId}`)!;
 
     this.modal = new Modal(this.modalElement);
     this.buttonOpenModal.addEventListener('click', () => this.modal!.show());
@@ -76,3 +95,4 @@ export class AdoptAnimalModalComponent implements OnInit, OnDestroy{
     }
   }
 }
+

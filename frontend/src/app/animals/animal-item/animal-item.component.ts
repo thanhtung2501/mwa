@@ -17,8 +17,17 @@ export class AnimalItemComponent implements OnInit {
   @Output() onUpdate = new EventEmitter();
   @Output() onAccept = new EventEmitter();
 
+  openModalBtnId: string = ""
+  closeModalBtnId: string = ""
+  declineModalBtnId: string = ""
+  modalId: string = ""
+
   ngOnInit() {
     this.imageSource = this.animal.image_url ? this.animal.image_url : '../../assets/default-image.jpg';
+    this.openModalBtnId = `openModal${this.animal._id}`;
+    this.modalId =`modal${this.animal._id}`;
+    this.closeModalBtnId = `closeModal${this.animal._id}`;
+    this.declineModalBtnId = `declineModal${this.animal._id}`;
   }
 
   onDeleteFunc() {
